@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "./math/SafeMathX.sol";
 import "./BEP20/SafeBEP20.sol";
 import "./BEP20/IBEP20.sol";
 
-contract TokenTimeLock {
+contract TokenTimeLock is OwnableUpgradeable {
     using SafeBEP20 for IBEP20;
     using SafeMathX for uint256;
 

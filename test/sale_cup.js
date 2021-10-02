@@ -102,4 +102,7 @@ contract('CUPSale', ([deployer, investor]) => {
     })
   })
 
+  describe('sell tokens and unlock user assert', async () => {
+    // @TODO write test here
+  })
 })

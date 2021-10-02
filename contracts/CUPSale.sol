@@ -6,9 +6,22 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "./BEP20/IBEP20.sol";
 import "./CUP.sol";
 
+interface LockFactory {
+    function createBlockWallet(
+        address owner_,
+        address user_,
+        address token_,
+        uint256 amount_,
+        uint32[] calldata lockDurations_,
+        uint32[] calldata releasePercents_,
+        uint64 startDate_
+    ) external returns (address);
+}
+
 contract CUPSale is Initializable, UUPSUpgradeable {
     string public name;
     IBEP20 public token;
+    LockFactory private locker;
     uint public rate;
 
     event TokensPurchased(
@@ -25,8 +38,9 @@ contract CUPSale is Initializable, UUPSUpgradeable {
         uint rate
     );
 
-    function initialize(IBEP20 _token) public initializer {
+    function initialize(IBEP20 _token, LockFactory _locker) public initializer {
         __UUPSUpgradeable_init();
+        locker = _locker;
         token = _token;
         rate = 100;
         name = "Instant Exchange Contract";
