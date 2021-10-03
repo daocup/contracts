@@ -17,7 +17,7 @@ contract TokenTimeLock is OwnableUpgradeable {
     uint32[] private _lockDurations;
 
     // Release percent of each phase
-    uint32[] private _releasePercents;
+    uint8[] private _releasePercents;
 
     // Total locked tokens
     uint256 private _amount;
@@ -29,7 +29,7 @@ contract TokenTimeLock is OwnableUpgradeable {
     address private _user;
 
     // Start date of the lock
-    uint64 private _startDate;
+    uint256 private _startDate;
 
     // Next release phase
     uint32 private _nextReleaseIdx;
@@ -63,7 +63,7 @@ contract TokenTimeLock is OwnableUpgradeable {
         return _releasedAmount;
     }
 
-    function startDate() public view returns (uint64) {
+    function startDate() public view returns (uint256) {
         return _startDate;
     }
 
@@ -71,7 +71,7 @@ contract TokenTimeLock is OwnableUpgradeable {
         return _lockDurations;
     }
 
-    function releasePercents() public view returns (uint32[] memory) {
+    function releasePercents() public view returns (uint8[] memory) {
         return _releasePercents;
     }
 
@@ -84,30 +84,30 @@ contract TokenTimeLock is OwnableUpgradeable {
     }
 
     function lockData()
-        public
-        view
-        returns (
-            address user,
-            address token_,
-            uint256 amount_,
-            uint256 releasedAmount_,
-            uint64 startDate_,
-            uint32[] memory lockDurations_,
-            uint32[] memory releasePercents_,
-            uint64[] memory releaseDates_,
-            uint32 nextReleaseIdx_
-        )
+    public
+    view
+    returns (
+        address user,
+        address token_,
+        uint256 amount_,
+        uint256 releasedAmount_,
+        uint256 startDate_,
+        uint32[] memory lockDurations_,
+        uint8[] memory releasePercents_,
+        uint64[] memory releaseDates_,
+        uint32 nextReleaseIdx_
+    )
     {
         return (
-            beneficiary(),
-            address(token()),
-            amount(),
-            releasedAmount(),
-            startDate(),
-            lockDurations(),
-            releasePercents(),
-            releaseDates(),
-            nextReleaseIdx()
+        beneficiary(),
+        address(token()),
+        amount(),
+        releasedAmount(),
+        startDate(),
+        lockDurations(),
+        releasePercents(),
+        releaseDates(),
+        nextReleaseIdx()
         );
     }
 
@@ -117,9 +117,10 @@ contract TokenTimeLock is OwnableUpgradeable {
         address token_,
         uint256 amount_,
         uint32[] calldata lockDurations_,
-        uint32[] calldata releasePercents_,
-        uint64 startDate_
+        uint8[] calldata releasePercents_,
+        uint256 startDate_
     ) public initializer returns (bool) {
+        __Ownable_init();
         require(
             lockDurations_.length == releasePercents_.length,
             "TokenTimeLock: unlock length not match"
@@ -156,7 +157,7 @@ contract TokenTimeLock is OwnableUpgradeable {
         );
         require(
             block.timestamp >=
-                _startDate + _lockDurations[_nextReleaseIdx] * 1 seconds,
+            _startDate + _lockDurations[_nextReleaseIdx] * 1 seconds,
             "TokenTimeLock: next phase unavailable"
         );
 
@@ -171,9 +172,9 @@ contract TokenTimeLock is OwnableUpgradeable {
             uint256 stepReleaseAmount = 0;
             if (_nextReleaseIdx == numOfPhases - 1) {
                 stepReleaseAmount =
-                    _amount -
-                    _releasedAmount -
-                    availableReleaseAmount;
+                _amount -
+                _releasedAmount -
+                availableReleaseAmount;
             } else {
                 stepReleaseAmount = _amount.mulScale(
                     _releasePercents[_nextReleaseIdx],
@@ -207,13 +208,6 @@ contract TokenTimeLock is OwnableUpgradeable {
             releaseDate
         );
 
-        return true;
-    }
-
-    function safetyRelease() public onlyOwner returns (bool) {
-        uint256 balance = token().balanceOf(address(this));
-        token().safeTransfer(owner(), balance);
-        emit SafetyReleaseActivated(balance, owner(), uint64(block.timestamp));
         return true;
     }
 }
