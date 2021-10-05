@@ -48,7 +48,7 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         __UUPSUpgradeable_init();
         lockerFactory = _locker;
         token = _token;
-        rate = 3000000;
+        rate = 54000;
         name = "CUP Sale Contract";
     }
 

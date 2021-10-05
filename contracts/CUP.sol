@@ -28,7 +28,7 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
         __Ownable_init();
         __UUPSUpgradeable_init();
 
-        mint(uint256(4999998000000).mul(uint256(10) ** 18));
+        mint(uint256(90000000000).mul(uint256(10) ** 18));
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}

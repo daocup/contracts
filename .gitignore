@@ -3,3 +3,4 @@ build
 .env*
 src/dev_abis
 src/abis/*.json
+.idea

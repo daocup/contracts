@@ -1,27 +1,18 @@
 import chai, {expect} from 'chai';
-import {deployContract, MockProvider, solidity} from 'ethereum-waffle';
-import {getDefaultProvider} from 'ethers-providers';
-import {deployProxy} from "@openzeppelin/truffle-upgrades";
-
+import {solidity} from 'ethereum-waffle';
 const CUP = artifacts.require("CUP");
-const CUPSale = artifacts.require("CUPSale")
-import chaiBN from 'chai-bignumber'
+const CUPSale = artifacts.require("CUPSale");
 import {
     BN,
     time,
 } from "@openzeppelin/test-helpers";
 import truffleAssert from "truffle-assertions";
-
-const TimeLock = artifacts.require("TokenTimeLock")
-const ethers = require("ethers");
+const TimeLock = artifacts.require("TokenTimeLock");
 chai.use(solidity);
 chai.use(require('chai-as-promised'))
     .should();
 const chaiBN = require('chai-bn')(BN);
 chai.use(chaiBN);
-import {expandTo18Decimals, getApprovalDigest} from './shared/utilities'
-import ganache from "ganache-cli";
-import exp from "constants";
 
 function tokens(n: string) {
     return web3.utils.toWei(n, 'ether');
@@ -54,9 +45,9 @@ contract('CUPSale', (accounts) => {
             assert.equal(name, 'CUP Sale Contract')
         });
 
-        it('contract has tokens total supply', async () => {
+        it('contract has tokens total supply: 90.000.000.000(90 bil)', async () => {
             let totalSupply = await cupToken.balanceOf(exchange.address);
-            assert.equal(totalSupply.toString(), tokens('4999998000000'))
+            assert.equal(totalSupply.toString(), tokens('90000000000'))
         })
     })
 
@@ -76,7 +67,7 @@ contract('CUPSale', (accounts) => {
             // Check CUPSale balance after purchase
             let CUPSaleBalance
             CUPSaleBalance = await cupToken.balanceOf(exchange.address);
-            assert.equal(CUPSaleBalance.toString(), tokens('4999995000000'));
+            assert.equal(CUPSaleBalance.toString(), tokens('89999946000'));
             CUPSaleBalance = await web3.eth.getBalance(exchange.address);
             assert.equal(CUPSaleBalance.toString(), tokens('1'));
 
@@ -88,13 +79,13 @@ contract('CUPSale', (accounts) => {
             // after purchase
             expect(purchaseEvent.wallet).to.not.equal(cupToken.address)
             let balanceWallet = await cupToken.balanceOf(purchaseEvent.wallet)
-            assert.equal(balanceWallet.toString(), tokens('3000000'))
+            assert.equal(balanceWallet.toString(), tokens('54000'))
             let investorBalanceAfter = await cupToken.balanceOf(investor);
             assert.equal(investorBalanceAfter, tokens('0'));
             // Check logs to ensure event was emitted with correct data
             assert.equal(purchaseEvent.account, investor)
-            assert.equal(purchaseEvent.rate.toString(), '3000000')
-            assert.equal(purchaseEvent.amount.toString(), tokens('3000000').toString())
+            assert.equal(purchaseEvent.rate.toString(), '54000')
+            assert.equal(purchaseEvent.amount.toString(), tokens('54000').toString())
             expect(investorBalanceAfter.toString()).to.be.eq(tokens('0').toString());
 
             // Try to release by increase time on blockchain
@@ -105,18 +96,18 @@ contract('CUPSale', (accounts) => {
 
             await myContract.release();
             const investorBalanceRelease = await cupToken.balanceOf(investor);
-            expect(investorBalanceRelease.toString()).to.be.eq(tokens('1200000').toString());
+            expect(investorBalanceRelease.toString()).to.be.eq(tokens('21600').toString());
 
             // Release after next 2months
             await time.increase(time.duration.days(30 * 2));
             await myContract.release();
             const investorBalanceReleaseNext7thMonth = await cupToken.balanceOf(investor);
-            expect(investorBalanceReleaseNext7thMonth.toString()).to.be.eq(tokens('2100000').toString());
+            expect(investorBalanceReleaseNext7thMonth.toString()).to.be.eq(tokens('37800').toString());
             // Release after next 2months
             await time.increase(time.duration.days(30 * 2));
             await myContract.release();
             const investorBalanceReleaseNext9thMonth = await cupToken.balanceOf(investor);
-            expect(investorBalanceReleaseNext9thMonth.toString()).to.be.eq(tokens('2700000').toString());
+            expect(investorBalanceReleaseNext9thMonth.toString()).to.be.eq(tokens('48600').toString());
         })
     })
 })
