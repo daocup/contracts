@@ -112,7 +112,6 @@ contract TokenTimeLock is OwnableUpgradeable {
     }
 
     function initialize(
-        address owner_,
         address user_,
         address token_,
         uint256 amount_,
@@ -143,12 +142,12 @@ contract TokenTimeLock is OwnableUpgradeable {
         _nextReleaseIdx = 0;
         _releaseDates = new uint64[](_lockDurations.length);
 
-        transferOwnership(owner_);
+        transferOwnership(user_);
 
         return true;
     }
 
-    function release() public returns (bool) {
+    function release() onlyOwner public returns (bool) {
         uint256 numOfPhases = _lockDurations.length;
 
         require(

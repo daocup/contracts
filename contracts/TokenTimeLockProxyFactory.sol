@@ -9,7 +9,7 @@ import "./TokenTimeLock.sol";
 import "./CUPSale.sol";
 
 contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpgradeable, LockFactory {
-    mapping(address => address) wallets;
+    mapping(address => address[]) wallets;
     address masterContract;
 
     function initialize(address _masterContract) public initializer {
@@ -22,7 +22,6 @@ contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpg
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
     function createBlockWallet(
-        address owner_,
         address user_,
         address token_,
         uint256 amount_,
@@ -35,7 +34,6 @@ contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpg
     returns (address) {
         TokenTimeLock timeLockWallet = TokenTimeLock(Clones.clone(masterContract));
         bool setupResult = timeLockWallet.initialize(
-            owner_,
             user_,
             token_,
             amount_,
@@ -43,16 +41,15 @@ contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpg
             releasePercents_,
             startDate_
         );
-        wallets[user_] = address(timeLockWallet);
+        wallets[user_].push(address(timeLockWallet));
         require(setupResult, "TokenTimeLock contract: can't setup");
-        return wallets[user_];
+        return address(timeLockWallet);
     }
 
-    function getLockWallet(address owner)
+    function getLockWallets(address owner)
     external
     override
-    view returns (address){
+    view returns (address[] memory){
         return wallets[owner];
     }
-
 }

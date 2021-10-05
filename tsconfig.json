@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2018", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "ES2018",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "**/*.ts",
+    "./truffle.d.ts",
+    "./test/shared/utilities.ts",
+    "./build"
+  ]
+}

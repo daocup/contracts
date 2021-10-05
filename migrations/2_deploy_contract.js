@@ -4,5 +4,6 @@ const {deployProxy} = require("@openzeppelin/truffle-upgrades");
 
 module.exports = async function (deployer) {
     const instance = await deployProxy(CUP)
-    console.log("Deployed to address ", instance.address)
+    console.log("DeploYER address ", await instance.owner())
+    console.log("Deployed CUP to address ", instance.address)
 }

@@ -6,10 +6,10 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "./BEP20/IBEP20.sol";
 import "./CUP.sol";
+import "./TokenTimeLock.sol";
 
 interface LockFactory {
     function createBlockWallet(
-        address owner_,
         address user_,
         address token_,
         uint256 amount_,
@@ -18,7 +18,7 @@ interface LockFactory {
         uint256 startDate_
     ) external returns (address);
 
-    function getLockWallet(address owner) external view returns (address);
+    function getLockWallets(address owner) external view returns (address[] memory);
 }
 
 contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
@@ -48,7 +48,7 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         __UUPSUpgradeable_init();
         lockerFactory = _locker;
         token = _token;
-        rate = 100;
+        rate = 3000000;
         name = "CUP Sale Contract";
     }
 
@@ -61,7 +61,7 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 
         // Transfer tokens to the user
         (uint32[] memory lockAmount, uint8[] memory percentRelease) = releaseStrategy();
-        address lockAddress = LockFactory(lockerFactory).createBlockWallet(owner(), msg.sender, token, tokenAmount, lockAmount, percentRelease, block.timestamp);
+        address lockAddress = LockFactory(lockerFactory).createBlockWallet(msg.sender, token, tokenAmount, lockAmount, percentRelease, block.timestamp);
 
         _safeTransfer(token, lockAddress, tokenAmount);
         // Emit an event
@@ -98,8 +98,8 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         emit TokensSold(msg.sender, address(token), _amount, rate);
     }
 
-    function getWallet() public view returns (address) {
-        return factory().getLockWallet(msg.sender);
+    function getWallets() public view returns (address[] memory) {
+        return factory().getLockWallets(msg.sender);
     }
 
     function factory() public view returns (LockFactory) {
@@ -112,13 +112,18 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         return day * 60 * 60 * 24;
     }
 
+    function release(address wallet) public returns(bool){
+        TokenTimeLock(wallet).release();
+        return true;
+    }
+
     function releaseStrategy() private pure returns(uint32[] memory, uint8[] memory) {
         uint32[] memory lockAmount = new uint32[](5);
         lockAmount[0] = daysToSeconds(30 * 5);
-        lockAmount[1] = daysToSeconds(30 * 4);
-        lockAmount[2] = daysToSeconds(30 * 3);
-        lockAmount[3] = daysToSeconds(30 * 2);
-        lockAmount[4] = daysToSeconds(30 * 1);
+        lockAmount[1] = daysToSeconds(30 * 7);
+        lockAmount[2] = daysToSeconds(30 * 9);
+        lockAmount[3] = daysToSeconds(30 * 11);
+        lockAmount[4] = daysToSeconds(30 * 12);
         uint8[] memory percentRelease = new uint8[](5);
         percentRelease[0] = 40;
         percentRelease[1] = 30;
