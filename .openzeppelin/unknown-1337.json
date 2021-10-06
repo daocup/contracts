@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0x17A98601c995CAbD37e55B2290D4438b979933a7",
-    "txHash": "0xe0a0014939009fce52c217422a04206f50f177a3789b771d345f41393671c213"
+    "address": "0x442cf8EB0a2BA9C2beA80bBfe09626a8F98780E9",
+    "txHash": "0x36110b0b03e5b5b27a85ed7e43fc90fc5c4bcb22b4f21bf118b39d962d223fb0"
   },
   "proxies": [
     {
@@ -5124,6 +5124,51 @@
       "address": "0xa8441C8640dB704b7153e0Da27a9247AA0a58565",
       "txHash": "0xa7ad74925bbaff8227ef099148b426ddddf21f82541c6e0c30a773a2159477d0",
       "kind": "uups"
+    },
+    {
+      "address": "0x0426F57CE5BCAd91917b8AF3Bf2AF51E0d4E3F6C",
+      "txHash": "0xbbb81875db0855cd4f38e91558166c040ffa1856c11bf228448f2421b8bcfccf",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4AEc134589E8c92d1DC13e1CdE01D4bEEcc29C3d",
+      "txHash": "0xbeccd51d021611829ba26eba49f155529a7b9d69534120212d4fd05d3100dc15",
+      "kind": "uups"
+    },
+    {
+      "address": "0xfE9A67Cf2F9ec98a0Cb89814935555D824e4AAca",
+      "txHash": "0x9e2f4c6834c004b3239228bd5adb3426a21e05883dcbadc7a67da36441083417",
+      "kind": "uups"
+    },
+    {
+      "address": "0x5Df12B7Bc2be94aD06283f3e99E64491092c6FF2",
+      "txHash": "0xf84ef969b2632ec40d8c6ce3515de3bd235b0569093622e5a888e6d176df95ea",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xfCb70Bc2B944922BF40db8018326BED4d83CE7E4",
+      "txHash": "0x6d694f054441ca294b064bff84765ddc4b2d45040116bba42b8df1ce6d637f39",
+      "kind": "uups"
+    },
+    {
+      "address": "0x29f3ab1e1448DBa4A4438389e501D3dF9e661D6b",
+      "txHash": "0x4b04089f1328fb7d8cf012cc1d79dbffda9a0bb75adc44807d22efb0861247a9",
+      "kind": "uups"
+    },
+    {
+      "address": "0x49cecAC494c1cb37ce15Df74CB1D8907Edd33027",
+      "txHash": "0x499c3feed9372f870b3d4eb2f95ebbc00d88bc8a062f688e611b7ffb8a76f257",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x859842b34AAfbC1Be47587835cb4795007bD9b0a",
+      "txHash": "0xa84193e42d6d0f83ff64e9b44968f64dbbf56fbee7c86cccdc5934f7ae4a106f",
+      "kind": "uups"
+    },
+    {
+      "address": "0xB71128Ff4eD0f9d5976EEBc71c13cC240bBE894a",
+      "txHash": "0x77c2aae2c56df00742957d9e4d634ebebfc3399ebea21dd5e4427803dc3c8c99",
+      "kind": "uups"
     }
   ],
   "impls": {
@@ -8145,8 +8190,8 @@
       }
     },
     "d39b430e927ec84546cb3990d94b3937a530f519c02f371420a91e98f58262df": {
-      "address": "0x84093702BBFbf36b02A72E19d357A47f78CfF221",
-      "txHash": "0x6c054acb7df86a01244f499a79139cd74b2858d3dd99f808b0bdfac457200e0f",
+      "address": "0xfd618aFfa5C866A178B70Dc439203920Fe1Cee6b",
+      "txHash": "0x1994d0b5a7b5fcdeb12b5ca67586f447224de3fb8834643e52f77f57b27b159b",
       "layout": {
         "storage": [
           {
@@ -8769,8 +8814,8 @@
       }
     },
     "83bdd8ff3fb68e1f33bf0c481ca829a2bf9a6edcd0dc6ed180e6e1d9120e1ed3": {
-      "address": "0x2102e80886cdf9F34F1A3A1AF1470F665e72831F",
-      "txHash": "0x228adcb06432f31cfabee074e0ed08cd1d59990ebd82b5b1687517fefe10b0e5",
+      "address": "0x2062efa4619384F8cE61b7249d98540EEB11d59D",
+      "txHash": "0xba473ba8d0804657ddf5d81e71d13fc3455499687daf7689b23ad39aea32c780",
       "layout": {
         "storage": [
           {
@@ -8830,7 +8875,7 @@
           {
             "contract": "CUPSale",
             "label": "lockerFactory",
-            "type": "t_contract(LockFactory)2676",
+            "type": "t_contract(LockFactory)2798",
             "src": "../project:/contracts/CUPSale.sol:27"
           },
           {
@@ -8847,7 +8892,7 @@
           "t_address": {
             "label": "address"
           },
-          "t_contract(LockFactory)2676": {
+          "t_contract(LockFactory)2798": {
             "label": "contract LockFactory"
           },
           "t_uint256": {
@@ -8967,6 +9012,136 @@
           },
           "t_string_storage": {
             "label": "string"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "5650f84696db21a91f11d2f9df2816f0beeaed6fe6df0fe6b22452133c7128b0": {
+      "address": "0xD571b5b6512397253E7BD9107f06c4B22Cf20A35",
+      "txHash": "0x49b6d9db65258f2e76c6d44614a6424c96467ad638f4caef14fd6efa77779b29",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:26"
+          },
+          {
+            "contract": "ERC1967UpgradeUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:214"
+          },
+          {
+            "contract": "UUPSUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:80"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:30"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:21"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:77"
+          },
+          {
+            "contract": "CUP",
+            "label": "_balances",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/CUP.sol:15"
+          },
+          {
+            "contract": "CUP",
+            "label": "_allowances",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "src": "../project:/contracts/CUP.sol:17"
+          },
+          {
+            "contract": "CUP",
+            "label": "_totalSupply",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUP.sol:19"
+          },
+          {
+            "contract": "CUP",
+            "label": "_decimals",
+            "type": "t_uint8",
+            "src": "../project:/contracts/CUP.sol:20"
+          },
+          {
+            "contract": "CUP",
+            "label": "_symbol",
+            "type": "t_string_storage",
+            "src": "../project:/contracts/CUP.sol:21"
+          },
+          {
+            "contract": "CUP",
+            "label": "_name",
+            "type": "t_string_storage",
+            "src": "../project:/contracts/CUP.sol:22"
+          },
+          {
+            "contract": "CUP",
+            "label": "DOMAIN_SEPARATOR",
+            "type": "t_bytes32",
+            "src": "../project:/contracts/CUP.sol:24"
+          },
+          {
+            "contract": "CUP",
+            "label": "nonces",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/CUP.sol:26"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
           },
           "t_array(t_uint256)49_storage": {
             "label": "uint256[49]"

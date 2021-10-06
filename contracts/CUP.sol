@@ -21,6 +21,11 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
     string private _symbol;
     string private _name;
 
+    bytes32 public DOMAIN_SEPARATOR;
+    bytes32 public constant PERMIT_TYPEHASH = keccak256("Permit(address owner,address spender, uint256 value, uint256 nonce, uint256 deadline)");
+    mapping(address => uint) public nonces;
+
+
     function initialize() public initializer {
         _name = "DAOCup";
         _symbol = "CUP";
@@ -29,6 +34,20 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
         __UUPSUpgradeable_init();
 
         mint(uint256(90000000000).mul(uint256(10) ** 18));
+
+        uint chainId;
+        assembly {
+            chainId := chainid()
+        }
+        DOMAIN_SEPARATOR = keccak256(
+            abi.encode(
+                keccak256('EIP712Domain(string name, string version, uint256 chainId, address verifyingContract)'),
+                keccak256(bytes(_name)),
+                keccak256(bytes('1')),
+                chainId,
+                address(this)
+            )
+        );
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
@@ -349,5 +368,19 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
                 "BEP20: burn amount exceeds allowance"
             )
         );
+    }
+
+    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external {
+        require(deadline >= block.timestamp, 'CUP: EXPIRED');
+        bytes32 digest = keccak256(
+            abi.encodePacked(
+                '\x19\x01',
+                DOMAIN_SEPARATOR,
+                keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))
+            )
+        );
+        address recoveredAddress = ecrecover(digest, v, r, s);
+        require(recoveredAddress != address(0) && recoveredAddress == owner, 'CUP: INVALID_SIGNATURE');
+        _approve(owner, spender, value);
     }
 }
