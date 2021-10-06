@@ -90,8 +90,11 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 
         // Perform sale
         _safeTransferFrom(token, msg.sender, address(this), _amount);
-        payable(msg.sender).call{value:etherAmount}("");
+        (bool success, ) = payable(msg.sender).call{value:etherAmount}("");
 
+        if (!success) {
+            revert("cannot send ether");
+        }
 //        payable(msg.sender).transfer(etherAmount);
 
         // Emit an event
