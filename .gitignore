@@ -4,3 +4,4 @@ build
 src/dev_abis
 src/abis/*.json
 .idea
+contracts/artifacts
