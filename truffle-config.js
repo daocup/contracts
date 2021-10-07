@@ -34,7 +34,12 @@ module.exports = {
      *
      * $ truffle test --network <network-name>
      */
-
+    plugins: [
+        'truffle-plugin-verify'
+    ],
+    api_keys: {
+        bscscan: process.env.BSCSCAN_KEY,
+    },
     networks: {
         // Useful for testing. The `development` name is special - truffle uses it by default
         // if it's defined here and no other network is specified at the command line.
@@ -57,7 +62,15 @@ module.exports = {
                 return new HDWalletProvider(process.env.MNEMONIC, "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY)
             },
             network_id: 3
-        }
+        },
+        testbsc: {
+            provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://data-seed-prebsc-1-s1.binance.org:8545`),
+            network_id: 97,
+            confirmations: 10,
+            timeoutBlocks: 200,
+            networkCheckTimeout: 100000,
+            skipDryRun: true
+        },
         // Another network with more advanced options...
         // advanced: {
         // port: 8777,             // Custom port
@@ -95,13 +108,13 @@ module.exports = {
         solc: {
             version: "0.8.2",    // Fetch exact version from solc-bin (default: truffle's version)
             // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-            // settings: {          // See the solidity docs for advice about optimization and evmVersion
-            //  optimizer: {
-            //    enabled: false,
-            //    runs: 200
-            //  },
-            //  evmVersion: "byzantium"
-            // }
+            settings: {          // See the solidity docs for advice about optimization and evmVersion
+                optimizer: {
+                    enabled: false,
+                    runs: 200
+                },
+                // evmVersion: "byzantium"
+            }
         }
     },
 

@@ -4,9 +4,7 @@
   "description": "Smart contracts for DAOCup",
   "main": "index.js",
   "scripts": {
-    "gas-report": "env ENABLE_GAS_REPORT=true npm run test",
-    "postinstall": "npx truffle compile && npm run generate-types",
-    "generate-types": "npx typechain --target=truffle-v5 'build/contracts/*.json'",
+    "gas-report": "env ENABLE_GAS_REPORT=true yarn run test",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -50,6 +48,7 @@
     "solhint-plugin-prettier": "0.0.5",
     "truffle": "^5.4.13",
     "truffle-assertions": "^0.9.2",
+    "truffle-plugin-verify": "^0.5.15",
     "truffle-typings": "^1.0.8",
     "ts-generator": "^0.0.8",
     "ts-node": "^10.2.1",

@@ -1,14 +1,9 @@
 {
   "compilerOptions": {
-    "lib": [
-      "ES2018",
-      "DOM"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
+    "lib": ["ES2018"],
+    "module": "CommonJS",
     "target": "ES2018",
-    "sourceMap": true,
+    "strict": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
     "resolveJsonModule": true,
@@ -19,12 +14,14 @@
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "types": ["@types/node", "@types/chai", "@types/mocha"],
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": [
     "**/*.ts",
     "./truffle.d.ts",
     "./test/shared/utilities.ts",
     "./build"
-  ]
+  ],
+  "exclude": ["node_modules", "build", "cache", "artifacts"]
 }
