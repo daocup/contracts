@@ -12,7 +12,8 @@ contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpg
     mapping(address => address[]) wallets;
     address masterContract;
 
-    function initialize(address _masterContract) public initializer {
+    function initialize(address _masterContract) external initializer {
+        require(_masterContract != address(0), "Compatible address");
         __Ownable_init();
         __UUPSUpgradeable_init();
 
@@ -46,10 +47,14 @@ contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpg
         return address(timeLockWallet);
     }
 
-    function getLockWallets(address owner)
+    function getLockWallets(address owner_)
     external
     override
     view returns (address[] memory){
-        return wallets[owner];
+        return wallets[owner_];
+    }
+
+    receive() external payable {
+        revert();
     }
 }

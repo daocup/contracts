@@ -30,7 +30,6 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     LockFactory private lockerFactory;
     uint public rate;
     uint256 public totalReward;
-    bytes4 private constant TRANSFER_SELECTOR = bytes4(keccak256(bytes('transfer(address,uint256)')));
     bytes4 private constant TRANSFER_FROM_SELECTOR = bytes4(keccak256(bytes('transferFrom(address,address,uint256)')));
 
     event TokensPurchased(
@@ -77,11 +76,6 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         emit TokensPurchased(msg.sender, lockAddress, tokenAmount, rate, reward);
     }
 
-    function _safeTransfer(address _token, address to, uint value) private {
-        (bool success, bytes memory data) = _token.call(abi.encodeWithSelector(TRANSFER_SELECTOR, to, value));
-        require(success && (data.length == 0 || abi.decode(data, (bool))), 'CUP: TRANSFER_FAILED');
-    }
-
     function _safeTransferFrom(address _token, address sender, address recipient, uint value) private {
         (bool success, bytes memory data) = _token.call(abi.encodeWithSelector(TRANSFER_FROM_SELECTOR, sender, recipient, value));
         require(success && (data.length == 0 || abi.decode(data, (bool))), 'CUP: TRANSFER_FROM_FAILED');
@@ -99,11 +93,6 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 
     function daysToSeconds(uint32 day) private pure returns (uint32) {
         return day * 60 * 60 * 24;
-    }
-
-    function release(address wallet) public returns (bool){
-        TokenTimeLock(wallet).release();
-        return true;
     }
 
     function releaseStrategy(uint8 lock) private pure returns (uint32[] memory, uint8[] memory, uint256) {

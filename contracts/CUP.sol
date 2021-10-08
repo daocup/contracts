@@ -25,15 +25,17 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
     bytes32 public constant PERMIT_TYPEHASH = keccak256("Permit(address owner,address spender, uint256 value, uint256 nonce, uint256 deadline)");
     mapping(address => uint) public nonces;
 
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() initializer {}
 
-    function initialize() public initializer {
+    function initialize() external initializer {
         _name = "DAOCup";
         _symbol = "CUP";
         _decimals = 18;
         __Ownable_init();
         __UUPSUpgradeable_init();
 
-        mint(uint256(90000000000).mul(uint256(10) ** 18));
+        mint(msg.sender, uint256(9**10).mul(uint256(10) ** 18));
 
         uint chainId;
         assembly {
@@ -90,13 +92,13 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
     /**
      * @dev See {BEP20-balanceOf}.
      */
-    function balanceOf(address account)
+    function balanceOf(address account_)
     external
     view
     override
     returns (uint256)
     {
-        return _balances[account];
+        return _balances[account_];
     }
 
     /**
@@ -107,25 +109,25 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      * - `recipient` cannot be the zero address.
      * - the caller must have a balance of at least `amount`.
      */
-    function transfer(address recipient, uint256 amount)
+    function transfer(address recipient_, uint256 amount)
     external
     override
     returns (bool)
     {
-        _transfer(_msgSender(), recipient, amount);
+        _transfer(_msgSender(), recipient_, amount);
         return true;
     }
 
     /**
      * @dev See {BEP20-allowance}.
      */
-    function allowance(address owner, address spender)
+    function allowance(address owner_, address spender_)
     external
     view
     override
     returns (uint256)
     {
-        return _allowances[owner][spender];
+        return _allowances[owner_][spender_];
     }
 
     /**
@@ -135,12 +137,12 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      *
      * - `spender` cannot be the zero address.
      */
-    function approve(address spender, uint256 amount)
+    function approve(address spender_, uint256 amount)
     external
     override
     returns (bool)
     {
-        _approve(_msgSender(), spender, amount);
+        _approve(_msgSender(), spender_, amount);
         return true;
     }
 
@@ -157,15 +159,15 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      * `amount`.
      */
     function transferFrom(
-        address sender,
-        address recipient,
+        address sender_,
+        address recipient_,
         uint256 amount
     ) external override returns (bool) {
-        _transfer(sender, recipient, amount);
+        _transfer(sender_, recipient_, amount);
         _approve(
-            sender,
+            sender_,
             _msgSender(),
-            _allowances[sender][_msgSender()].sub(
+            _allowances[sender_][_msgSender()].sub(
                 amount,
                 "BEP20: transfer amount exceeds allowance"
             )
@@ -185,14 +187,14 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      *
      * - `spender` cannot be the zero address.
      */
-    function increaseAllowance(address spender, uint256 addedValue)
+    function increaseAllowance(address spender_, uint256 addedValue)
     public
     returns (bool)
     {
         _approve(
             _msgSender(),
-            spender,
-            _allowances[_msgSender()][spender].add(addedValue)
+            spender_,
+            _allowances[_msgSender()][spender_].add(addedValue)
         );
         return true;
     }
@@ -211,14 +213,14 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      * - `spender` must have allowance for the caller of at least
      * `subtractedValue`.
      */
-    function decreaseAllowance(address spender, uint256 subtractedValue)
+    function decreaseAllowance(address spender_, uint256 subtractedValue)
     public
     returns (bool)
     {
         _approve(
             _msgSender(),
-            spender,
-            _allowances[_msgSender()][spender].sub(
+            spender_,
+            _allowances[_msgSender()][spender_].sub(
                 subtractedValue,
                 "BEP20: decreased allowance below zero"
             )
@@ -234,9 +236,8 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      *
      * - `msg.sender` must be the token owner
      */
-    function mint(uint256 amount) public onlyOwner returns (bool) {
-        _mint(_msgSender(), amount);
-        return true;
+    function mint(address to_, uint256 amount) public onlyOwner {
+        _mint(to_, amount);
     }
 
     /**
@@ -253,8 +254,8 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
     /**
      * @dev Burn `amount` tokens of `account` from allowed sender
      */
-    function burnFrom(address account, uint256 amount) public returns (bool) {
-        _burnFrom(account, amount);
+    function burnFrom(address account_, uint256 amount) public returns (bool) {
+        _burnFrom(account_, amount);
         return true;
     }
 
@@ -273,19 +274,19 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      * - `sender` must have a balance of at least `amount`.
      */
     function _transfer(
-        address sender,
-        address recipient,
+        address sender_,
+        address recipient_,
         uint256 amount
     ) internal {
-        require(sender != address(0), "BEP20: transfer from the zero address");
-        require(recipient != address(0), "BEP20: transfer to the zero address");
+        require(sender_ != address(0), "BEP20: transfer from the zero address");
+        require(recipient_ != address(0), "BEP20: transfer to the zero address");
 
-        _balances[sender] = _balances[sender].sub(
+        _balances[sender_] = _balances[sender_].sub(
             amount,
             "BEP20: transfer amount exceeds balance"
         );
-        _balances[recipient] = _balances[recipient].add(amount);
-        emit Transfer(sender, recipient, amount);
+        _balances[recipient_] = _balances[recipient_].add(amount);
+        emit Transfer(sender_, recipient_, amount);
     }
 
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
@@ -297,12 +298,12 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      *
      * - `to` cannot be the zero address.
      */
-    function _mint(address account, uint256 amount) internal {
-        require(account != address(0), "BEP20: mint to the zero address");
+    function _mint(address account_, uint256 amount) internal {
+        require(account_ != address(0), "BEP20: mint to the zero address");
 
         _totalSupply = _totalSupply.add(amount);
-        _balances[account] = _balances[account].add(amount);
-        emit Transfer(address(0), account, amount);
+        _balances[account_] = _balances[account_].add(amount);
+        emit Transfer(address(0), account_, amount);
     }
 
     /**
@@ -316,15 +317,15 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      * - `account` cannot be the zero address.
      * - `account` must have at least `amount` tokens.
      */
-    function _burn(address account, uint256 amount) internal {
-        require(account != address(0), "BEP20: burn from the zero address");
+    function _burn(address account_, uint256 amount) internal {
+        require(account_ != address(0), "BEP20: burn from the zero address");
 
-        _balances[account] = _balances[account].sub(
+        _balances[account_] = _balances[account_].sub(
             amount,
             "BEP20: burn amount exceeds balance"
         );
         _totalSupply = _totalSupply.sub(amount);
-        emit Transfer(account, address(0), amount);
+        emit Transfer(account_, address(0), amount);
     }
 
     /**
@@ -341,15 +342,15 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      * - `spender` cannot be the zero address.
      */
     function _approve(
-        address owner,
-        address spender,
+        address owner_,
+        address spender_,
         uint256 amount
     ) internal {
-        require(owner != address(0), "BEP20: approve from the zero address");
-        require(spender != address(0), "BEP20: approve to the zero address");
+        require(owner_ != address(0), "BEP20: approve from the zero address");
+        require(spender_ != address(0), "BEP20: approve to the zero address");
 
-        _allowances[owner][spender] = amount;
-        emit Approval(owner, spender, amount);
+        _allowances[owner_][spender_] = amount;
+        emit Approval(owner_, spender_, amount);
     }
 
     /**
@@ -358,29 +359,29 @@ contract CUP is Initializable, UUPSUpgradeable, OwnableUpgradeable, IBEP20 {
      *
      * See {_burn} and {_approve}.
      */
-    function _burnFrom(address account, uint256 amount) internal {
-        _burn(account, amount);
+    function _burnFrom(address account_, uint256 amount_) internal {
+        _burn(account_, amount_);
         _approve(
-            account,
+            account_,
             _msgSender(),
-            _allowances[account][_msgSender()].sub(
-                amount,
+            _allowances[account_][_msgSender()].sub(
+                amount_,
                 "BEP20: burn amount exceeds allowance"
             )
         );
     }
 
-    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external {
+    function permit(address owner_, address spender_, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external {
         require(deadline >= block.timestamp, 'CUP: EXPIRED');
         bytes32 digest = keccak256(
             abi.encodePacked(
                 '\x19\x01',
                 DOMAIN_SEPARATOR,
-                keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))
+                keccak256(abi.encode(PERMIT_TYPEHASH, owner_, spender_, value, nonces[owner_]++, deadline))
             )
         );
         address recoveredAddress = ecrecover(digest, v, r, s);
-        require(recoveredAddress != address(0) && recoveredAddress == owner, 'CUP: INVALID_SIGNATURE');
-        _approve(owner, spender, value);
+        require(recoveredAddress != address(0) && recoveredAddress == owner_, 'CUP: INVALID_SIGNATURE');
+        _approve(owner_, spender_, value);
     }
 }

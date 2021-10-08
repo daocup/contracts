@@ -100,7 +100,7 @@ contract TokenTimeLock is OwnableUpgradeable {
     {
         return (
         beneficiary(),
-        address(token()),
+        _token,
         amount(),
         releasedAmount(),
         startDate(),
