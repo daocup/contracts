@@ -3,7 +3,7 @@ const CUPSale = artifacts.require("CUPSale");
 const TokenTimeLock = artifacts.require("TokenTimeLock");
 const TokenTimeLockFactory = artifacts.require("TokenTimeLockProxyFactory");
 const {deployProxy} = require("@openzeppelin/truffle-upgrades");
-
+const web3 = require('web3')
 module.exports = async function(deployer) {
   const token = await Token.deployed()
 
@@ -16,7 +16,6 @@ module.exports = async function(deployer) {
   // Deploy Exchange
   await deployProxy(CUPSale, [token.address, factory.address], {kind: 'uups', deployer: deployer});
   const exchange = await CUPSale.deployed()
-  const totalSupply = await token.totalSupply();
-  await token.transfer(exchange.address, totalSupply)
-
+  await token.approve(exchange.address, web3.utils.toWei('9000000000'));
+  console.log("Allowance for exchange", (await token.allowance(await token.owner(), exchange.address)).toString())
 };

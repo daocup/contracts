@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Web3 from 'web3'
-import Token from '../abis/AAA.json'
-import Exchange from '../abis/AAAEth.json'
+import Token from '../abis/CUP.json'
+import Exchange from '../abis/CUPSale.json'
 import Navbar from './Navbar'
 import Main from './Main'
 import './App.css'
@@ -16,9 +16,8 @@ class App extends Component {
             ethBalance: '0',
             tokenBalance: '0',
             loading: true
-        }
+        };
         this.buyTokens = this.buyTokens.bind(this);
-        this.sellTokens = this.sellTokens.bind(this);
     }
 
     async UNSAFE_componentWillMount() {
@@ -78,18 +77,17 @@ class App extends Component {
             from: this.state.account
         }).on('transactionHash', (hash) => {
             this.setState({loading: false})
+        }).on('receipt', (receipt) => {
+            const purchaseInfo = receipt.events.TokensPurchased.returnValues;
+            //    event TokensPurchased(
+            //         address account,
+            //         address wallet,
+            //         uint amount,
+            //         uint rate
+            //     );
+            const walletAddress = purchaseInfo.wallet;
         })
     }
-
-    sellTokens = (tokenAmount) => {
-        this.setState({loading: true})
-        this.state.token.methods.approve(this.state.exchangeAddress.address, tokenAmount).send({from: this.state.account}).on('transactionHash', (hash) => {
-            this.state.exchange.methods.sellTokens(tokenAmount).send({from: this.state.account}).on('transactionHash', (hash) => {
-                this.setState({loading: false})
-            })
-        })
-    }
-
 
     render() {
         let content
@@ -100,7 +98,6 @@ class App extends Component {
                 ethBalance={this.state.ethBalance}
                 tokenBalance={this.state.tokenBalance}
                 buyTokens={this.buyTokens}
-                sellTokens={this.sellTokens}
             />
         }
 

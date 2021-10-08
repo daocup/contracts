@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import BuyForm from './BuyForm'
-import SellForm from './SellForm'
 
 class Main extends Component {
   constructor(props) {
@@ -18,12 +17,6 @@ class Main extends Component {
         tokenBalance={this.props.tokenBalance}
         buyTokens={this.props.buyTokens}
       />
-    } else {
-      content = <SellForm
-        ethBalance={this.props.ethBalance}
-        tokenBalance={this.props.tokenBalance}
-        sellTokens={this.props.sellTokens}
-      />
     }
 
     return (
@@ -37,15 +30,6 @@ class Main extends Component {
               }}
             >
             Buy
-          </button>
-          <span className="text-muted">&lt; &nbsp; &gt;</span>
-          <button
-              className="btn btn-light"
-              onClick={(event) => {
-                this.setState({ currentForm: 'sell' })
-              }}
-            >
-            Sell
           </button>
         </div>
 
