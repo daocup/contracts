@@ -1,0 +1,11 @@
+$home-page: homepage;
+.#{$home-page} {
+  height: 100vh;
+  .header-menu {
+    height: 60px;
+  }
+
+  .section {
+    height: calc(100vh - 60px);
+  }
+}
