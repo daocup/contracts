@@ -1,10 +1,18 @@
 import React, {Component} from 'react'
 import Web3 from 'web3'
 import Token from '../abis/CUP.json'
-import Exchange from '../abis/CUPCake.json'
+import ETHSale from '../abis/EthSale.json'
 import Navbar from './Navbar'
 import Main from './Main'
 import './App.css'
+import BNBSale from '../abis/BNBSale.json'
+
+async function loadExchange(networkId) {
+    if (networkId === 97 || networkId === 56) {
+        return BNBSale
+    }
+    return ETHSale;
+}
 
 class App extends Component {
     constructor(props) {
@@ -27,7 +35,6 @@ class App extends Component {
 
     async loadBlockchainData() {
         const web3 = window.web3
-
         const accounts = await web3.eth.getAccounts()
         this.setState({account: accounts[0]})
 
@@ -36,6 +43,7 @@ class App extends Component {
 
         // Load Token
         const networkId = await web3.eth.net.getId()
+        let Exchange = await loadExchange(networkId);
         const tokenData = Token.networks[networkId]
         if (tokenData) {
             const token = new web3.eth.Contract(Token.abi, tokenData.address)
@@ -86,6 +94,7 @@ class App extends Component {
             //         uint rate
             //     );
             const walletAddress = purchaseInfo.wallet;
+            console.log(walletAddress)
         })
     }
 
