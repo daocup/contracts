@@ -11,16 +11,6 @@
       "kind": "transparent"
     },
     {
-      "address": "0xE7B519538f4437cb343cF96c7425f48350B7914F",
-      "txHash": "0xd0a59c235705b104c22f22f488ad1321a5309aa6ee5ba1e593751a61d9ec41f8",
-      "kind": "transparent"
-    },
-    {
-      "address": "0x5E7c3c71Bc3d83d2e3CbC3aF3486b941f4BA0FF6",
-      "txHash": "0x59a8ef7ff563628cbfd5286dd24f6ff08610478feee1209f70008b5a1850cce7",
-      "kind": "uups"
-    },
-    {
       "address": "0x47d33245a33F7645Cfee32Fc2E5596eFE8A97B99",
       "txHash": "0x3afa8786ca766a57d9f8085a99b5f61d53657ec6466c68285a9273ffacc9abaa",
       "kind": "transparent"
@@ -78,6 +68,26 @@
     {
       "address": "0xc4Bb5Bb44Cc16595489cFE7C0ee987ce73f2C84F",
       "txHash": "0x5b9897e62354c45a84e3def5a5de0d856ec1b0dca2f0a0140df58cc24adbe6ed",
+      "kind": "uups"
+    },
+    {
+      "address": "0xE7B519538f4437cb343cF96c7425f48350B7914F",
+      "txHash": "0xd0a59c235705b104c22f22f488ad1321a5309aa6ee5ba1e593751a61d9ec41f8",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x5E7c3c71Bc3d83d2e3CbC3aF3486b941f4BA0FF6",
+      "txHash": "0x59a8ef7ff563628cbfd5286dd24f6ff08610478feee1209f70008b5a1850cce7",
+      "kind": "uups"
+    },
+    {
+      "address": "0xE6Fde72d452672B2B5E296e817D9464859c36eB6",
+      "txHash": "0x912eb8959c3331bfb9556e63ee947f3841c4dfe0b37f7a0a99fd532e485707de",
+      "kind": "uups"
+    },
+    {
+      "address": "0xcc4d345430b6069eFe16b35c1271ea53470dA8E1",
+      "txHash": "0x7089fea28de1de966acd8e5808c8a6113d6ec02c5cdb2af533b1c692f7727b5c",
       "kind": "uups"
     }
   ],
@@ -213,8 +223,8 @@
       }
     },
     "161b3802e1038781c43de7bba37e1de34ad5f349bbfd69ec26705bdb5274eab3": {
-      "address": "0xd50d878f6d44A4CF46Ace54053a8bFfEa5A994df",
-      "txHash": "0x8b65821778476531d4d4f7752be1863338dd6b7ecdec5c2e88cb7761886b68f2",
+      "address": "0x330DC05A8F0bcbf234177C8ccb1942c5a6F28B56",
+      "txHash": "0x4f98293665a08e9f4861b23484a1f489f6a70fdb7285c7f8e82199375025708c",
       "layout": {
         "storage": [
           {
@@ -409,6 +419,115 @@
     "c0915fb159d27a3270a0d29dfc581486279b8928ec08193faf34740c1bd453e8": {
       "address": "0x6b073d1c1f06e0FD6d035ce8731b8de59dF1C2CD",
       "txHash": "0x227ffa3825b1e012bd25e3abe9e5254bb87d288aaec27d21900ffa4bb6f1dbe0",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:26"
+          },
+          {
+            "contract": "ERC1967UpgradeUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:214"
+          },
+          {
+            "contract": "UUPSUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:80"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:30"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:21"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:77"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "deadline",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUPCake.sol:27"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "name",
+            "type": "t_string_storage",
+            "src": "../project:/contracts/CUPCake.sol:28"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "token",
+            "type": "t_address",
+            "src": "../project:/contracts/CUPCake.sol:29"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "lockerFactory",
+            "type": "t_contract(LockFactory)3867",
+            "src": "../project:/contracts/CUPCake.sol:30"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "rate",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUPCake.sol:31"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "totalReward",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUPCake.sol:32"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_contract(LockFactory)3867": {
+            "label": "contract LockFactory"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "60e97ca6d51da075e3ac50a6255c5646c64af830351ba493c58a1d93fc53a23e": {
+      "address": "0xab1704d8fE12D98743D014cf4E5EacB3eeA7a5A6",
+      "txHash": "0x10f4bb75c8997f7acfb6daf825c7366cc61be3107ef8a88cc45326d3e8aa1a5d",
       "layout": {
         "storage": [
           {
