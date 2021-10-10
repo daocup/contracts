@@ -6,7 +6,8 @@ class BuyForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      output: '0'
+      output: '0',
+        lockDuration: 12
     }
   }
 
@@ -17,7 +18,7 @@ class BuyForm extends Component {
           let etherAmount
           etherAmount = this.input.value.toString()
           etherAmount = window.web3.utils.toWei(etherAmount, 'Ether')
-          this.props.buyTokens(etherAmount)
+          this.props.buyTokens(this.state.lockDuration, etherAmount)
         }}>
         <div>
           <label className="float-left"><b>Input</b></label>

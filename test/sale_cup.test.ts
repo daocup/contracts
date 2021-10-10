@@ -42,9 +42,13 @@ contract('CUPSale', ([deployer, investor, alice, bob, john, paul]) => {
             assert.equal(name, 'CUP Sale Contract')
         });
 
-        it('contract has tokens total allowance: 9.000.000.000(9 bil)', async () => {
-            let totalSupply = await cupToken.allowance(deployer, exchange.address);
-            assert.equal(totalSupply.toString(), tokens('9000000000'), "Total allowance")
+        it('Token has total supplye: 90.000.000.000(9 bil)', async () => {
+            const totalSupply = await cupToken.totalSupply();
+            assert.equal(totalSupply.toString(), tokens('90000000000'), "Total Supply")
+        })
+        it('contract has provide allowance for exchange: 9.000.000.000(9 bil)', async () => {
+            const allownance = await cupToken.allowance(deployer, exchange.address);
+            assert.equal(allownance.toString(), tokens('9000000000'), "Total allowance")
         })
     })
 
