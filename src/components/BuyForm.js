@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import tokenLogo from '../daocup.png'
-import ethLogo from '../eth-logo.png'
+import tokenLogo from '../shared/assets/daocup.png'
+import ethLogo from '../shared/assets/eth-logo.png'
 
 class BuyForm extends Component {
   constructor(props) {
