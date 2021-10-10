@@ -22,7 +22,7 @@ interface LockFactory {
     function getLockWallets(address owner) external view returns (address[] memory);
 }
 
-contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
+abstract contract CUPCake is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     using SafeMath for uint256;
     uint256 public deadline;
     string public name;
@@ -45,18 +45,15 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         uint256 reward
     );
 
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() initializer {}
-
-    function initialize(address token_, address locker_, uint rate_) public initializer {
+    function __CUPCake_init(address token_, address locker_, uint256 deadline_, uint rate_) internal initializer {
         __Ownable_init();
         __UUPSUpgradeable_init();
         lockerFactory = LockFactory(locker_);
         token = token_;
-        rate = rate_;
         name = "CUP Sale Contract";
-        deadline = 0;
         totalReward = 0;
+        deadline = deadline_;
+        rate = rate_;
     }
 
     function buyTokens(uint8 lock) public payable {

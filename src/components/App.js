@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Web3 from 'web3'
 import Token from '../abis/CUP.json'
-import Exchange from '../abis/CUPSale.json'
+import Exchange from '../abis/CUPCake.json'
 import Navbar from './Navbar'
 import Main from './Main'
 import './App.css'

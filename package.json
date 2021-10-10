@@ -11,8 +11,7 @@
     "eject": "react-scripts eject",
     "build-sol": "waffle",
     "test-sol": "truffle test",
-    "build-dev": "rm -rf src/abis/* && truffle compile --all && truffle migrate --reset && cp src/dev_abis/* src/abis",
-    "build-ropsten": "rm -rf src/abis/* && ABI_FOLDERS=./src/ropsten_abis truffle compile --all && ABI_FOLDERS=./src/ropsten_abis truffle migrate --network ropsten && cp src/ropsten_abis/* src/abis"
+    "build-dev": "rm -rf src/abis/* && truffle compile --all && truffle migrate --reset && cp src/dev_abis/* src/abis"
   },
   "keywords": [
     "contracts",

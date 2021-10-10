@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "./TokenTimeLock.sol";
-import "./CUPSale.sol";
+import "./CUPCake.sol";
 
 contract TokenTimeLockProxyFactory is Initializable, UUPSUpgradeable, OwnableUpgradeable, LockFactory {
     mapping(address => address[]) wallets;
