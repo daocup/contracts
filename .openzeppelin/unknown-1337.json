@@ -1,8 +1,8 @@
 {
   "manifestVersion": "3.2",
   "admin": {
-    "address": "0x85a245235E53a8cea5E39bAb4b1D0756472AfFa6",
-    "txHash": "0x545fa841c7e690c82ac5872d8196806100d3fd44a59aa623db9a4977374e8579"
+    "address": "0x8A67e120307FCa83024035E35a7ef7fB8b4dD322",
+    "txHash": "0x3d390cc7528c5fb3ff1398b382221ae24b9e0c361675ed36d0749babba874f82"
   },
   "proxies": [
     {
@@ -199,12 +199,37 @@
       "address": "0x42F0f632E87A37af31fe83495c3390AFfb33773D",
       "txHash": "0x4dd6538943be2158e98e7f88ae9269976cb24a23853095af6df0e1ffa0481dd7",
       "kind": "uups"
+    },
+    {
+      "address": "0xB0320861ae3C642FDa5c8EC56E5b1590Bac1022b",
+      "txHash": "0xa026018b7a0dd43ca18295675698e4d60b9d3332b3796bb4a0085e57401d986e",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x09587Df91fAe84a29CB390DDEF7d73DB4a33cbBF",
+      "txHash": "0x0674839177b009b3424aabe94ec3636478db07fa0070ee7de5f18800e082a613",
+      "kind": "uups"
+    },
+    {
+      "address": "0xfbAa212F73433F55844a52e9Cc289522eBF3945d",
+      "txHash": "0x45961cf85d24a8b89555f258231a4f8315f7e6ed3c5a82e31f1b5e7e5f4f96a7",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xe345D96f593818F0F3CE80014a94391ceCb19540",
+      "txHash": "0x800dd55f3c203d23fc7020a72045364ccf36d27449afeeefc59c5c4d4941d1a0",
+      "kind": "uups"
+    },
+    {
+      "address": "0x11427C9b5c6dE8E26abadde28CE24E934A98b583",
+      "txHash": "0xbb49e0d558621dcf84404a13181379c2d4baab6483a1e214dfe445057301a406",
+      "kind": "uups"
     }
   ],
   "impls": {
     "cc06c3c2dd2579ea5f09b56df7712280d6f7371623277d24a0756366a2c64c7d": {
-      "address": "0x04a07bd215405e2115Ab8408141dcC581C8417ba",
-      "txHash": "0x56db8a1deadf4ced8f7bc9ba7540edea38226b663df7ed1118595a482bdd56fa",
+      "address": "0xB0320861ae3C642FDa5c8EC56E5b1590Bac1022b",
+      "txHash": "0xcdaff52447375443d44e8c353ad224adae695afd8f5273e8705ec578f0eb5d76",
       "layout": {
         "storage": [
           {
@@ -333,8 +358,8 @@
       }
     },
     "161b3802e1038781c43de7bba37e1de34ad5f349bbfd69ec26705bdb5274eab3": {
-      "address": "0x21041E6F54d20791D0d20E36f91F8DaAEd2BE563",
-      "txHash": "0x94fc2746f06d14459dd6449c006c6d9ffbb0e2b540360a074cb12ec52ba635a7",
+      "address": "0x5ef4a7b0EB70f1B4d3a70A31118f322d5b15d053",
+      "txHash": "0xcb0d8ff668415ad1597b9baa3cd60655fefb2b1c46795f8e852712daccc46a46",
       "layout": {
         "storage": [
           {
@@ -529,6 +554,115 @@
     "a20c055c915294c76a4bfdda5b03d11e66edb0b357a664c5872e41d412ac049f": {
       "address": "0x6719972704dF9c6801d40956a7545352cd54474F",
       "txHash": "0x8b1c68e24b8fb448e2acc8d3ef39d3002ba14d979fd951074867a087d37a74cb",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:26"
+          },
+          {
+            "contract": "ERC1967UpgradeUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:214"
+          },
+          {
+            "contract": "UUPSUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:80"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:30"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:21"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:77"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "deadline",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUPCake.sol:27"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "name",
+            "type": "t_string_storage",
+            "src": "../project:/contracts/CUPCake.sol:28"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "token",
+            "type": "t_address",
+            "src": "../project:/contracts/CUPCake.sol:29"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "lockerFactory",
+            "type": "t_contract(LockFactory)3867",
+            "src": "../project:/contracts/CUPCake.sol:30"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "rate",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUPCake.sol:31"
+          },
+          {
+            "contract": "CUPCake",
+            "label": "totalReward",
+            "type": "t_uint256",
+            "src": "../project:/contracts/CUPCake.sol:32"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_contract(LockFactory)3867": {
+            "label": "contract LockFactory"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "a68bf10727c6dc8908f62a0a0b561ed8763843542b81a07966f98bb581ee3a06": {
+      "address": "0x1433bD5Ce9a44ED39a11E65adDdE447624CA7d58",
+      "txHash": "0x82348261e33f645766af270c9ef66d965d83a66c63849c97dfe61b2e304b33b1",
       "layout": {
         "storage": [
           {

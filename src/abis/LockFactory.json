@@ -142,13 +142,13 @@
         3074
       ],
       "SafeMathX": [
-        5334
+        5367
       ],
       "StorageSlotUpgradeable": [
         1714
       ],
       "TokenTimeLock": [
-        5112
+        5145
       ],
       "UUPSUpgradeable": [
         689
@@ -248,7 +248,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 4627,
-        "sourceUnit": 5113,
+        "sourceUnit": 5146,
         "src": "394:29:23",
         "symbolAliases": [],
         "unitAlias": ""
@@ -10472,13 +10472,13 @@
         3074
       ],
       "SafeMathX": [
-        5334
+        5367
       ],
       "StorageSlotUpgradeable": [
         1714
       ],
       "TokenTimeLock": [
-        5112
+        5145
       ],
       "UUPSUpgradeable": [
         689
@@ -10578,7 +10578,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 4627,
-        "sourceUnit": 5113,
+        "sourceUnit": 5146,
         "src": "394:29:23",
         "symbolAliases": [],
         "unitAlias": ""
@@ -20741,7 +20741,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-10T10:41:18.087Z",
+  "updatedAt": "2021-10-10T10:57:30.661Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
