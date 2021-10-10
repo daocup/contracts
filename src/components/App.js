@@ -70,9 +70,9 @@ class App extends Component {
         }
     }
 
-    buyTokens = (etherAmount) => {
+    buyTokens = (lockDuration, etherAmount) => {
         this.setState({loading: true})
-        this.state.exchange.methods.buyTokens().send({
+        this.state.exchange.methods.buyTokens(lockDuration).send({
             value: etherAmount,
             from: this.state.account
         }).on('transactionHash', (hash) => {

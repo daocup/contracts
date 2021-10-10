@@ -45,12 +45,15 @@ contract CUPSale is Initializable, UUPSUpgradeable, OwnableUpgradeable {
         uint256 reward
     );
 
-    function initialize(address _token, LockFactory _locker) public initializer {
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() initializer {}
+
+    function initialize(address token_, address locker_, uint rate_) public initializer {
         __Ownable_init();
         __UUPSUpgradeable_init();
-        lockerFactory = _locker;
-        token = _token;
-        rate = 100000;
+        lockerFactory = LockFactory(locker_);
+        token = token_;
+        rate = rate_;
         name = "CUP Sale Contract";
         deadline = 0;
         totalReward = 0;
