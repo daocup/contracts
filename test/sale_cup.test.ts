@@ -1,13 +1,13 @@
+import truffleAssert from "truffle-assertions";
+import {
+    BN,
+    time,
+} from "@openzeppelin/test-helpers";
 import chai, {expect} from 'chai';
 import {solidity} from 'ethereum-waffle';
 
 const CUP = artifacts.require("CUP");
 const CUPCake = artifacts.require("BNBSale");
-import {
-    BN,
-    time,
-} from "@openzeppelin/test-helpers";
-import truffleAssert from "truffle-assertions";
 const TimeLock = artifacts.require("TokenTimeLock");
 const chaiBN = require('chai-bn')(BN);
 chai.use(solidity);
@@ -112,7 +112,7 @@ contract('CUPCake', ([deployer, investor, alice, bob, john, paul]) => {
         })
 
         it('Kick start deadline and move time to deadline. Paul can buy. Next day, he can not buy token any more', async () => {
-            await exchange.activeDeadline(1, {from: deployer});
+            await exchange.activeDeadline(30, {from: deployer});
             await time.increase(time.duration.days(29));
             const result = await exchange.buyTokens(3, {from: paul, value: web3.utils.toWei('2', 'ether')})
             await expectSale(deployer, exchange, result, cupToken, paul,

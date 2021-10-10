@@ -1,37 +1,27 @@
 {
-  "name": "@daocup/smart-contracts",
-  "version": "1.0.0",
-  "description": "Smart contracts for DAOCup",
-  "main": "index.js",
-  "scripts": {
-    "gas-report": "env ENABLE_GAS_REPORT=true yarn run test",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-sol": "waffle",
-    "test-sol": "truffle test",
-    "build-dev": "rm -rf src/abis/* && truffle compile --all && truffle migrate --reset && cp src/dev_abis/* src/abis"
-  },
-  "keywords": [
-    "contracts",
-    "dao",
-    "cup"
-  ],
-  "author": "admin@daocup.com",
-  "license": "MIT",
+  "name": "cup-contracts",
+  "version": "0.1.0",
+  "private": true,
   "devDependencies": {
     "@openzeppelin/contracts": "^4.1.0",
     "@openzeppelin/contracts-upgradeable": "^4.1.0",
     "@openzeppelin/test-helpers": "^0.5.14",
     "@openzeppelin/truffle-upgrades": "^1.9.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "@truffle/hdwallet-provider": "1.5.0",
     "@typechain/truffle-v5": "^5.1.0",
     "@types/chai": "^4.2.22",
     "@types/chai-as-promised": "^7.1.4",
-    "@types/mocha": "^8.2.3",
+    "@types/jest": "^26.0.15",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^15.14.9",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "bn-chai": "^1.0.1",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^3.0.0",
     "dotenv": "^10.0.0",
     "eth-gas-reporter": "^0.2.22",
@@ -41,8 +31,12 @@
     "ethers-utils": "^2.1.11",
     "ganache": "^6.4.5",
     "ganache-cli": "^6.12.2",
+    "mocha": "^9.1.2",
     "prettier": "^2.3.1",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
     "solhint": "^3.3.6",
     "solhint-plugin-prettier": "0.0.5",
     "truffle": "^5.4.13",
@@ -53,7 +47,8 @@
     "ts-node": "^10.2.1",
     "tsconfig-paths": "^3.9.0",
     "typechain": "^5.1.2",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "web-vitals": "^1.0.1"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
@@ -63,8 +58,6 @@
     "babel-preset-stage-3": "6.24.1",
     "babel-register": "6.24.1",
     "bootstrap": "5.1.0",
-    "chai-as-promised": "7.1.1",
-    "chai-bn": "^0.3.0",
     "ethers-providers": "^2.1.19",
     "identicon.js": "^2.3.3",
     "react": "17.0.2",
@@ -72,6 +65,18 @@
     "react-dom": "17.0.2",
     "react-scripts": "4.0.3",
     "web3": "1.5.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [

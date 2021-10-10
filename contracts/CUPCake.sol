@@ -58,7 +58,7 @@ abstract contract CUPCake is Initializable, UUPSUpgradeable, OwnableUpgradeable 
 
     function buyTokens(uint8 lock) public payable {
         if (deadline > 0) {
-            require(block.timestamp < deadline, "CUPSale: End of sale. Goodbye!");
+            require(block.timestamp < deadline, "CUPCake: End of sale. Goodbye!");
         }
         (uint32[] memory lockAmount, uint8[] memory percentRelease, uint256 reward) = releaseStrategy(lock);
         // Calculate the number of tokens to buy
@@ -155,8 +155,8 @@ abstract contract CUPCake is Initializable, UUPSUpgradeable, OwnableUpgradeable 
         return (lockAmount, percentRelease, uint256(10));
     }
 
-    function activeDeadline(uint8 month) public onlyOwner {
-        deadline = block.timestamp + daysToSeconds(30*month);
+    function activeDeadline(uint8 days_) public onlyOwner {
+        deadline = block.timestamp + daysToSeconds(days_);
     }
 
     function completeSale() public onlyOwner{
