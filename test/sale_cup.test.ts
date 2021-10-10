@@ -2,7 +2,7 @@ import chai, {expect} from 'chai';
 import {solidity} from 'ethereum-waffle';
 
 const CUP = artifacts.require("CUP");
-const CUPSale = artifacts.require("CUPSale");
+const CUPCake = artifacts.require("BNBSale");
 import {
     BN,
     time,
@@ -19,12 +19,12 @@ function tokens(n: string) {
     return web3.utils.toWei(n, 'ether');
 }
 
-contract('CUPSale', ([deployer, investor, alice, bob, john, paul]) => {
+contract('CUPCake', ([deployer, investor, alice, bob, john, paul]) => {
     let cupToken, exchange;
     before(async () => {
         cupToken = await CUP.deployed();
-        exchange = await CUPSale.deployed();
-        // Transfer all tokens to CUPSale (1 million)
+        exchange = await CUPCake.deployed();
+        // Transfer all tokens to CUPCake (1 million)
     })
 
     describe('CUP deployment', async () => {
@@ -36,7 +36,7 @@ contract('CUPSale', ([deployer, investor, alice, bob, john, paul]) => {
         })
     })
 
-    describe('CUPSale deployment', async () => {
+    describe('CUPCake deployment', async () => {
         it('contract has a name', async () => {
             const name = await exchange.name()
             assert.equal(name, 'CUP Sale Contract')
@@ -130,7 +130,7 @@ contract('CUPSale', ([deployer, investor, alice, bob, john, paul]) => {
                 '8999050000', // 9.000.000.000 - 220.000
                 '8');
             await time.increase(time.duration.days(1));
-            await expect(exchange.buyTokens(3, {from: paul, value: web3.utils.toWei('2', 'ether')})).to.be.revertedWith("CUPSale: End of sale. Goodbye!");
+            await expect(exchange.buyTokens(3, {from: paul, value: web3.utils.toWei('2', 'ether')})).to.be.revertedWith("CUPCake: End of sale. Goodbye!");
             expect(await web3.eth.getBalance(exchange.address)).to.be.eq(tokens('8'));
 
             const complete = await exchange.completeSale();
@@ -205,9 +205,9 @@ const expectSale = async (deployer, exchange, result, cupToken, user,
     expect(investorBalanceReleaseNext9thMonth.toString(), "Third release").to.be.eq(tokens(thirdReleaseBalance).toString());
 
 
-    // Check CUPSale balance after purchase
-    let CUPSaleBalance = await cupToken.allowance(deployer, exchange.address);
-    assert.equal(CUPSaleBalance.toString(), tokens(allowanceAfterSale), "Allowance of Saleman Contract");
-    let CUPSaleBalanceEth = await web3.eth.getBalance(exchange.address);
-    assert.equal(CUPSaleBalanceEth.toString(), tokens(etherAfterSale), "Ether in SaleMan address");
+    // Check CUPCake balance after purchase
+    let CUPCakeBalance = await cupToken.allowance(deployer, exchange.address);
+    assert.equal(CUPCakeBalance.toString(), tokens(allowanceAfterSale), "Allowance of Saleman Contract");
+    let CUPCakeBalanceEth = await web3.eth.getBalance(exchange.address);
+    assert.equal(CUPCakeBalanceEth.toString(), tokens(etherAfterSale), "Ether in SaleMan address");
 }

@@ -20,7 +20,6 @@
 require("ts-node").register({
     files: true,
 });
-const ganache = require('ganache-cli');
 require('dotenv').config();
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 module.exports = {
@@ -62,6 +61,12 @@ module.exports = {
                 return new HDWalletProvider(process.env.MNEMONIC, "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY)
             },
             network_id: 3
+        },
+        rinkeby: {
+            provider: function () {
+                return new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/" + process.env.INFURA_API_KEY)
+            },
+            network_id: 4
         },
         testbsc: {
             provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://data-seed-prebsc-1-s1.binance.org:8545`),
