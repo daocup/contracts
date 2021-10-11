@@ -79,7 +79,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-sol": "waffle",
+    "test-sol": "npx truffle test",
+    "build-ropsten": "npx truffle compile --all && npx truffle migrate --network ropsten && npx truffle deploy --network ropsten",
+    "build-rinkeby": "npx truffle compile --all && npx truffle migrate --network rinkeby && npx truffle deploy --network rinkeby",
+    "build-testbsc": "npx truffle compile --all && npx truffle migrate --network testbsc && npx truffle deploy --network testbsc",
+    "build-dev": "rm -rf src/abis/* && truffle compile --all && truffle migrate --reset && cp src/dev_abis/* src/abis"
   },
   "eslintConfig": {
     "extends": [
