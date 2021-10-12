@@ -8,7 +8,7 @@ import './App.css'
 import BNBSale from '../abis/BNBSale.json'
 
 async function loadExchange(networkId) {
-    if (networkId === 97 || networkId === 56) {
+    if (networkId === 97 || networkId === 56 || networkId === 5777) {
         return BNBSale
     }
     return ETHSale;

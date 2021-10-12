@@ -150,7 +150,8 @@
       "name": "buyTokens",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -170,7 +171,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -183,7 +185,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -196,7 +199,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -209,7 +213,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -222,7 +227,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -235,7 +241,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -255,7 +262,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -268,7 +276,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -312,11 +321,13 @@
       "name": "upgradeToAndCall",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [
@@ -17154,12 +17165,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xd1313A4F49ABaBc4db4e5237Ea6F688d5AD7E673",
+      "address": "0x1535cE7BccC6484a14dACbDfD995C915C632E6bf",
       "transactionHash": "0x8b1c68e24b8fb448e2acc8d3ef39d3002ba14d979fd951074867a087d37a74cb"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-11T03:46:55.040Z",
+  "updatedAt": "2021-10-12T07:37:25.466Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

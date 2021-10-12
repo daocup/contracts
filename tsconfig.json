@@ -31,7 +31,6 @@
     ]
   },
   "include": [
-    "src",
     "**/*.ts",
     "./truffle.d.ts",
     "./test/shared/utilities.ts",
@@ -41,6 +40,7 @@
     "node_modules",
     "build",
     "cache",
-    "artifacts"
+    "artifacts",
+    "subgraph"
   ]
 }

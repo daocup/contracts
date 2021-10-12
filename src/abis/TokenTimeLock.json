@@ -93,7 +93,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -126,7 +127,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -139,7 +141,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -152,7 +155,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -165,7 +169,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -178,7 +183,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -191,7 +197,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -204,7 +211,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -217,7 +225,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -230,7 +239,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -283,7 +293,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -26926,12 +26937,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xE32Ee336E032fFa925115E676DABA264ea7D6420",
-      "transactionHash": "0xa98a53a906c90d0d1ac1bc31304dd7181e68ccb108a6959f1cba4e6923854072"
+      "address": "0xac12F3ec94594fC40c4ef0F779aD0176D1e5c065",
+      "transactionHash": "0xcf449da418cd81f5af1e6ace1ba1aca62197a396d875f10a1dda029ace09f15b"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-11T03:46:55.415Z",
+  "updatedAt": "2021-10-12T07:37:25.505Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

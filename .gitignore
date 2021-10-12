@@ -3,3 +3,4 @@ build
 .env*
 .idea
 contracts/artifacts
+/subgraph/daocup-campaign/node_modules/
