@@ -1,0 +1,68 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: BNBSale
+    network: mainnet
+    source:
+      address: "0x1535cE7BccC6484a14dACbDfD995C915C632E6bf"
+      abi: BNBSale
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeaconUpgraded
+        - OwnershipTransferred
+        - TokensPurchased
+        - TokensSold
+        - Upgraded
+      abis:
+        - name: BNBSale
+          file: ./abis/BNBSale.json
+      eventHandlers:
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: TokensPurchased(indexed address,address,uint256,uint256,uint256)
+          handler: handleTokensPurchased
+        - event: TokensSold(uint256,uint256)
+          handler: handleTokensSold
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/mapping.ts
+#  - kind: ethereum/contract
+#    name: EthSale
+#    network: mainnet
+#    source:
+#      address: "0x346AaF6F271C0588e465FAd2F6FC0349C397727f"
+#      abi: EthSale
+#    mapping:
+#      kind: ethereum/events
+#      apiVersion: 0.0.5
+#      language: wasm/assemblyscript
+#      entities:
+#        - AdminChanged
+#        - BeaconUpgraded
+#        - OwnershipTransferred
+#        - TokensPurchased
+#        - TokensSold
+#        - Upgraded
+#      abis:
+#        - name: EthSale
+#          file: ./abis/EthSale.json
+#      eventHandlers:
+#        - event: BeaconUpgraded(indexed address)
+#          handler: handleBeaconUpgraded
+#        - event: OwnershipTransferred(indexed address,indexed address)
+#          handler: handleOwnershipTransferred
+#        - event: TokensPurchased(indexed address,address,uint256,uint256,uint256)
+#          handler: handleTokensPurchased
+#        - event: TokensSold(uint256,uint256)
+#          handler: handleTokensSold
+#        - event: Upgraded(indexed address)
+#          handler: handleUpgraded
+#      file: ./src/mapping.ts

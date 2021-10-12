@@ -1,0 +1,8 @@
+type PurchaseEntity @entity {
+    id: ID!
+    amount: BigInt
+    reward: BigInt
+    rate: BigInt
+    timestamp: BigInt
+    account: String
+}
