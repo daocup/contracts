@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "./BEP20/IBEP20.sol";
+import "./BEP20/BaseERC20.sol";
 import "./CUP.sol";
 import "./TokenTimeLock.sol";
 
@@ -68,7 +68,7 @@ abstract contract CUPCake is Initializable, UUPSUpgradeable, OwnableUpgradeable 
         totalReward = totalReward + rewardAmount;
 
         // Transfer tokens to the user
-        require(IBEP20(token).balanceOf(owner()) >= tokenAmount);
+        require(BaseERC20(token).balanceOf(owner()) >= tokenAmount);
         address lockAddress = LockFactory(lockerFactory).createBlockWallet(msg.sender, token, tokenAmount, lockAmount, percentRelease, block.timestamp);
 
         _safeTransferFrom(token, owner(), lockAddress, tokenAmount);

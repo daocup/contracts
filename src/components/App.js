@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import Web3 from 'web3'
 import Token from '../abis/CUP.json'
 import ETHSale from '../abis/EthSale.json'
+import BNBSale from '../abis/BNBSale.json'
 import Navbar from './Navbar'
 import Main from './Main'
 import './App.css'
-import BNBSale from '../abis/BNBSale.json'
 
 async function loadExchange(networkId) {
     if (networkId === 97 || networkId === 56 || networkId === 5777) {
@@ -23,7 +23,8 @@ class App extends Component {
             exchange: {},
             ethBalance: '0',
             tokenBalance: '0',
-            loading: true
+            loading: true,
+            rate: 100000,
         };
         this.buyTokens = this.buyTokens.bind(this);
     }
@@ -47,7 +48,7 @@ class App extends Component {
         const tokenData = Token.networks[networkId]
         if (tokenData) {
             const token = new web3.eth.Contract(Token.abi, tokenData.address)
-            this.setState({token})
+            this.setState({token});
             let tokenBalance = await token.methods.balanceOf(this.state.account).call()
             this.setState({tokenBalance: tokenBalance.toString()})
         } else {
@@ -58,6 +59,9 @@ class App extends Component {
         const exchangeData = Exchange.networks[networkId]
         if (exchangeData) {
             const exchange = new web3.eth.Contract(Exchange.abi, exchangeData.address)
+            const rate = await exchange.methods.rate().call();
+            this.setState({rate});
+            console.log(rate)
             this.setState({exchangeAddress: exchangeData})
             this.setState({exchange: exchange})
         } else {
@@ -106,6 +110,7 @@ class App extends Component {
             content = <Main
                 ethBalance={this.state.ethBalance}
                 tokenBalance={this.state.tokenBalance}
+                rate={this.state.rate}
                 buyTokens={this.buyTokens}
             />
         }

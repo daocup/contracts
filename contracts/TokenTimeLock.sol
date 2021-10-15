@@ -4,10 +4,10 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "./math/SafeMathX.sol";
 import "./BEP20/SafeBEP20.sol";
-import "./BEP20/IBEP20.sol";
+import "./BEP20/BaseERC20.sol";
 
 contract TokenTimeLock is OwnableUpgradeable {
-    using SafeBEP20 for IBEP20;
+    using SafeBEP20 for BaseERC20;
     using SafeMathX for uint256;
 
     // Release date that user initiates a release of each phase
@@ -47,8 +47,8 @@ contract TokenTimeLock is OwnableUpgradeable {
 
     event SafetyReleaseActivated(uint256 amount, address to, uint64 date);
 
-    function token() public view returns (IBEP20) {
-        return IBEP20(_token);
+    function token() public view returns (BaseERC20) {
+        return BaseERC20(_token);
     }
 
     function beneficiary() public view returns (address) {
