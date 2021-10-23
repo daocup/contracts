@@ -191,6 +191,7 @@ const expectSale = async (deployer, exchange, result, cupToken, user,
     // Try to release by increase time on blockchain
     await time.increase(time.duration.days(firstReleaseDays));
     let myContract = await TimeLock.at(purchaseEvent.wallet);
+    expect(myContract.owner()).to.be.eventually.eq(user);
     let walletOwner = await myContract.owner();
     expect(walletOwner).to.be.eq(user);
 

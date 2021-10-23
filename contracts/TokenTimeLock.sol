@@ -120,6 +120,7 @@ contract TokenTimeLock is OwnableUpgradeable {
         uint256 startDate_
     ) public initializer returns (bool) {
         __Ownable_init();
+        transferOwnership(user_);
         require(
             lockDurations_.length == releasePercents_.length,
             "TokenTimeLock: unlock length not match"
@@ -141,8 +142,6 @@ contract TokenTimeLock is OwnableUpgradeable {
         _releasedAmount = 0;
         _nextReleaseIdx = 0;
         _releaseDates = new uint64[](_lockDurations.length);
-
-        transferOwnership(user_);
 
         return true;
     }
