@@ -13,6 +13,7 @@ class BuyForm extends Component {
     }
 
     render() {
+        console.log('buyTokens',this.props)
         return (
             <form className="mb-3" onSubmit={(event) => {
                 event.preventDefault()
