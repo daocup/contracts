@@ -91,8 +91,12 @@ const ReleaseTab = props => {
                 id='outlined-adornment-amount'
                 endAdornment={
                   <InputAdornment position='end'>
-                    <LogoCircleSmall />
-                    <Typography sx={{ color: '#fff' }} ml={1}>xDAI</Typography>
+                    <Box sx={{
+                      width: 24,
+                      height: 24,
+                      background: 'linear-gradient(0deg, #0463EF -19.46%, #36D9D1 55.07%, #5EFCA1 104.76%)',
+                    }} />
+                    <Typography sx={{ color: '#fff' }} ml={1}>Juventus</Typography>
                   </InputAdornment>
                 }
 
@@ -198,15 +202,13 @@ const ReleaseTab = props => {
         </RadioGroup>
       </div>
 
-      <Box sx={{mt: 2}} className='form-footer'>
+      <Box sx={{ mt: 2 }} className='form-footer'>
         <button className={'btn-swap-now'}>Swap Now</button>
       </Box>
     </div>
   );
 };
 
-ReleaseTab.propTypes = {
-
-};
+ReleaseTab.propTypes = {};
 
 export default ReleaseTab;
