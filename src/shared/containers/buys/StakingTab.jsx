@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box, Button,
-  FormControl, FormControlLabel,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput, Radio,
-  RadioGroup,
-  Typography,
-} from '@mui/material';
+import { Box, Button, FormControl, Grid, InputAdornment, InputLabel, OutlinedInput, Typography } from '@mui/material';
 import { ReactComponent as LogoCircleSmall } from '../../assets/logo-circle-small.svg';
 import BorderLinearProgress from '../../components/BorderLinearProgress';
 import { formatNumber } from '../../../utils/StringUtils';
@@ -87,9 +78,9 @@ const StakingTab = props => {
 
       <div className='form-input-section'>
         <Grid container spacing={2}>
-          {stakingList.map(staking => {
+          {stakingList.map((staking, ind) => {
             return (
-              <Grid item xs={12}>
+              <Grid key={staking.name} item xs={12}>
                 <FormControl
                   sx={{
                     width: '100%',
@@ -144,32 +135,27 @@ const StakingTab = props => {
                 <Box mt={2}>
                   <Grid container spacing={2}>
                     <Grid item xs={24} md={4}>
-                      <Typography sx={{color: "#91A3B5"}}>Avg. per Year:</Typography>
-                      <Typography sx={{color: "#fff"}}>{staking.avgPerYear}%</Typography>
+                      <Typography sx={{ color: '#91A3B5' }}>Avg. per Year:</Typography>
+                      <Typography sx={{ color: '#fff' }}>{staking.avgPerYear}%</Typography>
                     </Grid>
 
                     <Grid item xs={24} md={4}>
-                      <Typography sx={{color: "#91A3B5"}}>Total Staking:</Typography>
-                      <Typography sx={{color: "#fff"}}>{formatNumber(staking.total)}</Typography>
+                      <Typography sx={{ color: '#91A3B5' }}>Total Staking:</Typography>
+                      <Typography sx={{ color: '#fff' }}>{formatNumber(staking.total)}</Typography>
                     </Grid>
 
-                    <Grid item xs={24} md={4} sx={{display: "flex", justifyContent: "flex-end"}}>
+                    <Grid item xs={24} md={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                       <Button
                         sx={{
-                          color: "#02172D",
+                          color: '#02172D',
                           backgroundColor: '#1FF493',
                           borderRadius: 12,
                           width: 115,
-                          textTransform: "capitalize",
+                          textTransform: 'capitalize',
 
                           '&:hover': {
                             backgroundColor: '#1FF493',
                           },
-
-                          '&.${buttonUnstyledClasses.active}': {
-                            backgroundColor: ' #1FF493',
-                          },
-
                         }}
                         variant='contained'>
                         Staking
@@ -178,6 +164,8 @@ const StakingTab = props => {
 
                   </Grid>
                 </Box>
+
+                {ind < stakingList.length - 1 && (<Box sx={{ borderBottom: '1px solid #385573', mt: 2, mb: 1 }} />)}
               </Grid>
             );
 

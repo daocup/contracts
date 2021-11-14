@@ -5,7 +5,7 @@ import ReleaseTab from './buys/ReleaseTab';
 
 const BuyDCupSection = props => {
 
-  const [tabActive, setTabActive] = useState(null);
+  const [tabActive, setTabActive] = useState("invest");
   const onChangeTab = (item) => {
     setTabActive(item);
   };

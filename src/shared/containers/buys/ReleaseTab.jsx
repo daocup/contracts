@@ -1,19 +1,72 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  FormControl, FormControlLabel,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput, Radio,
-  RadioGroup,
-  Typography,
-} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { ReactComponent as LogoCircleSmall } from '../../assets/logo-circle-small.svg';
 import BorderLinearProgress from '../../components/BorderLinearProgress';
+import { formatDateTimeFromUnix, formatNumber } from '../../../utils/StringUtils';
+import { FORMATS } from '../../../configs/constant';
 
 const ReleaseTab = props => {
-  const [formData, setFormData] = useState({ willGet: '1000 + 100 bonus', amount: '0.0' });
+
+  const [tokenReleaseList, setTokenReleaseList] = useState([]);
+
+  const getTokenReleaseList = () => {
+    setTokenReleaseList([
+      {
+        walletAddress: 'xxx0000000000',
+        link: 'bit.com/ansidk',
+        progress: [
+          {
+            ratio: 40,
+            value: 80,
+          },
+          {
+            ratio: 30,
+            value: 0,
+          },
+          {
+            ratio: 20,
+            value: 0,
+          },
+          {
+            ratio: 10,
+            value: 0,
+          },
+        ],
+        nextRelease: '1636874955',
+        purchaseTime: '1636874955',
+        totalCoins: '120000000',
+      },
+      {
+        walletAddress: 'xxx0000000001',
+        link: 'bit.com/ansidk',
+        progress: [
+          {
+            ratio: 40,
+            value: 100,
+          },
+          {
+            ratio: 30,
+            value: 70,
+          },
+          {
+            ratio: 20,
+            value: 0,
+          },
+          {
+            ratio: 10,
+            value: 0,
+          },
+        ],
+        nextRelease: '1636874955',
+        purchaseTime: '1636874955',
+        totalCoins: '115500000',
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    getTokenReleaseList();
+  }, []);
 
   return (
     <div className='form-container'>
@@ -53,158 +106,92 @@ const ReleaseTab = props => {
 
       <div className='form-input-section'>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <FormControl
-              sx={{
-                width: '100%',
-                '& input': {
-                  color: '#fff',
-                },
-                '& label.Mui-focused': {
-                  color: '#fff',
-                  marginTop: 1,
-                },
-                '& label': {
-                  color: '#fff',
-                  marginTop: formData?.willGet ? 1 : 0,
-                },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#1FF493',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#1FF493',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#1FF493',
-                  },
-                },
-              }}
+          {tokenReleaseList.map(token => {
+            return (
+              <Grid key={token.walletAddress} item xs={12}>
+                <Box mt={2}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={24} md={6}>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography sx={{ color: '#91A3B5', fontSize: 14 }}>Wallet Address: </Typography>
+                        <Typography sx={{ color: '#fff', ml: 1 }}>{token.walletAddress}</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={24} md={6}>
+                      <a href={token.link} rel={"referrer"}>
+                        <Typography sx={{
+                          color: '#0F79F7',
+                          fontSize: 14,
+                          textDecorationLine: 'underline',
+                        }}>{token.link}</Typography>
+                      </a>
+                    </Grid>
+                  </Grid>
+                </Box>
 
-              variant='outlined'>
-              <InputLabel htmlFor='outlined-adornment-amount'>Amount</InputLabel>
-              <OutlinedInput
-                onChange={(e) => {
-                  setFormData({ ...formData, amount: e.target.value });
-                }}
-                value={formData.amount}
-                id='outlined-adornment-amount'
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <Box sx={{
-                      width: 24,
-                      height: 24,
-                      background: 'linear-gradient(0deg, #0463EF -19.46%, #36D9D1 55.07%, #5EFCA1 104.76%)',
-                    }} />
-                    <Typography sx={{ color: '#fff' }} ml={1}>Juventus</Typography>
-                  </InputAdornment>
-                }
+                <Grid mt={1} mb={2} container spacing={1}>
+                  {token.progress.map(item => {
+                    return (
+                      <Grid key={item.ratio} item xs={24} md={item.ratio / 10}>
+                        <BorderLinearProgress variant='determinate' value={item.value} />
+                        <Typography sx={{ color: '#91A3B5', textAlign: "center", fontSize: 12 }}>{item.ratio}%</Typography>
+                      </Grid>
+                    )
+                  })}
+                </Grid>
 
-                label='Amount'
-              />
-            </FormControl>
-          </Grid>
+                <Box mt={2}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={24} md={4}>
+                      <Typography sx={{ color: '#91A3B5', fontSize: 14 }}>Next Release:</Typography>
+                      <Typography
+                        sx={{ color: '#fff' }}>{formatDateTimeFromUnix(token.nextRelease, FORMATS.DATE_TIME_FORM)}</Typography>
+                    </Grid>
 
-          <Grid item xs={12}>
-            <FormControl
-              sx={{
-                width: '100%',
-                '& input': {
-                  color: '#fff',
-                },
-                '& label.Mui-focused': {
-                  color: '#fff',
-                  marginTop: 1,
-                },
-                '& label': {
-                  color: '#fff',
-                  marginTop: formData?.willGet ? 1 : 0,
-                },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: '#1FF493',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: '#1FF493',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#1FF493',
-                  },
-                },
-              }}
+                    <Grid item xs={24} md={4}>
+                      <Typography sx={{ color: '#91A3B5', fontSize: 14 }}>Purchase Time:</Typography>
+                      <Typography
+                        sx={{ color: '#fff' }}>{formatDateTimeFromUnix(token.purchaseTime, FORMATS.DATE_TIME_FORM)}</Typography>
+                    </Grid>
 
-              variant='outlined'>
-              <InputLabel htmlFor='outlined-adornment-you_will_get'>You will get</InputLabel>
-              <OutlinedInput
-                onChange={(e) => {
-                  setFormData({ ...formData, willGet: e.target.value });
-                }}
-                value={formData.willGet}
-                id='outlined-adornment-you_will_get'
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <LogoCircleSmall />
-                    <Typography sx={{ color: '#fff' }} ml={1}>DCup</Typography>
-                  </InputAdornment>
-                }
+                    <Grid item xs={24} md={4}>
+                      <Typography sx={{ color: '#91A3B5', fontSize: 14 }}>Total Coins:</Typography>
+                      <Typography sx={{ color: '#fff' }}>{formatNumber(token.totalCoins)}</Typography>
+                    </Grid>
 
-                label='You will get'
-              />
-            </FormControl>
-          </Grid>
+                  </Grid>
+                </Box>
+
+                <Box mt={2}>
+                  <Button
+                    sx={{
+                      color: '#02172D',
+                      backgroundColor: '#1FF493',
+                      borderRadius: 12,
+                      width: 115,
+                      height: 48,
+                      fontSize: 18,
+                      textTransform: 'capitalize',
+                      fontWeight: "normal",
+                      '&:hover': {
+                        backgroundColor: '#1FF493',
+                      },
+
+                    }}
+                    variant='contained'>
+                    Release
+                  </Button>
+                </Box>
+              </Grid>
+            );
+          })}
+
+
         </Grid>
+
+
       </div>
 
-      <div className='form-time-section'>
-        <RadioGroup
-          aria-label='gender'
-          defaultValue='female'
-          name='radio-buttons-group'
-          row
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-              <FormControlLabel sx={{ color: '#fff' }} value='3m' control={<Radio sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: 28,
-                },
-                color: '#1FF493',
-                '&.Mui-checked': {
-                  color: '#1FF493',
-                },
-              }} />} label='3 months 10% Bonus' />
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <FormControlLabel sx={{ color: '#fff' }} value='6m' control={<Radio sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: 28,
-                },
-                color: '#1FF493',
-                '&.Mui-checked': {
-                  color: '#1FF493',
-                },
-              }} />} label='6 months 20% Bonus' />
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <FormControlLabel sx={{ color: '#fff' }} value='12m' control={<Radio sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: 28,
-                },
-                color: '#1FF493',
-                '&.Mui-checked': {
-                  color: '#1FF493',
-                },
-              }} />} label='12 months 50% Bonus' />
-            </Grid>
-          </Grid>
-        </RadioGroup>
-      </div>
-
-      <Box sx={{ mt: 2 }} className='form-footer'>
-        <button className={'btn-swap-now'}>Swap Now</button>
-      </Box>
     </div>
   );
 };
