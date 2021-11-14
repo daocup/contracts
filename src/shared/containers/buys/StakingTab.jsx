@@ -20,16 +20,14 @@ const StakingTab = props => {
 
       <div className={'form-info-header'}>
         <Grid container spacing={2}>
-          <Grid item xs={5}>
+          <Grid item xs={5} className={'separator'}>
             <Box className={'invest-title'}>
               <Typography className='title-1'>Staking</Typography>
               <Typography className='description'>Make some profit now</Typography>
             </Box>
           </Grid>
-          <Grid item xs={1}>
-            <Box className={'separator'} />
-          </Grid>
-          <Grid item xs={6}>
+
+          <Grid item xs={7}>
             <div className={'invest-info'}>
 
               <div className={'progress-bar-block'}>

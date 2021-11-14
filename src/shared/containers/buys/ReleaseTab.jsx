@@ -20,15 +20,13 @@ const ReleaseTab = props => {
 
       <div className={'form-info-header'}>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={5} className={'separator'}>
             <Box className={'invest-title'}>
               <Typography className='title-1'>Release</Typography>
               <Typography className='description'>Release your tokens</Typography>
             </Box>
           </Grid>
-          <Grid item xs={1}>
-            <Box className={'separator'} />
-          </Grid>
+
           <Grid item xs={7}>
             <div className={'invest-info'}>
 

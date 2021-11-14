@@ -20,14 +20,11 @@ const InvestTab = props => {
 
       <div className={'form-info-header'}>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={5} className={'separator'}>
             <Box className={'invest-title'}>
               <Typography className='title-1'>Invest</Typography>
               <Typography className='description'>Buy tokens instantly</Typography>
             </Box>
-          </Grid>
-          <Grid item xs={1}>
-            <Box className={'separator'} />
           </Grid>
           <Grid item xs={7}>
             <div className={'invest-info'}>
@@ -200,15 +197,13 @@ const InvestTab = props => {
         </RadioGroup>
       </div>
 
-      <Box sx={{mt: 2}} className='form-footer'>
+      <Box sx={{ mt: 2 }} className='form-footer'>
         <button className={'btn-swap-now'}>Swap Now</button>
       </Box>
     </div>
   );
 };
 
-InvestTab.propTypes = {
-
-};
+InvestTab.propTypes = {};
 
 export default InvestTab;
