@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ProgressBar from "@ramonak/react-progress-bar";
 import logoinvest from "../INVEST.svg";
+import Getdata from "../components/Getdata";
+
 class InvestForm extends Component {
     constructor(props) {
         super(props)
@@ -10,9 +12,11 @@ class InvestForm extends Component {
             rate: 0
         }
     }
-
+   
     render() {
-        console.log('buyTokens',this.props)
+        let ABI_Object = new Getdata(this.props.exchange,this.props.account);
+        console.log('exchane',this.props.exchange)
+        console.log('props',this.props)
         return (
 
 
@@ -44,7 +48,7 @@ class InvestForm extends Component {
                     let etherAmount
                     etherAmount = this.input.value.toString()
                     etherAmount = window.web3.utils.toWei(etherAmount, 'Ether')
-                    this.props.buyTokens(this.state.lockDuration, etherAmount)
+                    ABI_Object.buyTokens(this.state.lockDuration, etherAmount)
                 }}>
                     <div className="amount_input">
                         <label htmlFor="amout">
@@ -66,6 +70,9 @@ class InvestForm extends Component {
                                 this.input = input
                             }}
                         />
+                        <span className="float-right text-muted">
+                            Balance: {window.web3.utils.fromWei(this.props.ethBalance, 'Ether')}
+                        </span>
                         <div className="r_icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6187 0 24 5.37608 24 12C24 18.6239 18.6187 24 12 24C5.38125 24 0 18.6239 0 12C0 5.37608 5.38125 0 12 0Z" fill="#48A9A6" />
@@ -90,6 +97,9 @@ class InvestForm extends Component {
                             value={this.state.output}
                         // value={`${Number(values.amout)*1000} + ${(Number(values.bonus)*Number(values.amout)*10)} bonus`}
                         />
+                        <span className="float-right text-muted">
+                Balance: {window.web3.utils.fromWei(this.props.tokenBalance, 'Ether')}
+              </span>
                         <div className="r_icon">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C15.5156 0 20 4.48006 20 10C20 15.5199 15.5156 20 10 20C4.48438 20 0 15.5199 0 10C0 4.48006 4.48438 0 10 0Z" fill="#1FF493" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
+//import * as Yup from 'yup';
 import ProgressBar from "@ramonak/react-progress-bar";
 import logorelease from "../RELEASE.svg";
 export type Values = {
@@ -7,7 +8,9 @@ export type Values = {
     getamount: string;
     bonus: string;
 };
-
+// const validation = Yup.object().shape({
+//     amout: Yup.string().max(255, 'Too Long!').required('Required'),
+// });
 const ReleaseForm = () => {
     let initialValues = {
         amout: '1.0',
@@ -20,6 +23,7 @@ const ReleaseForm = () => {
         <>
             <Formik
                 initialValues={initialValues}
+               // validationSchema={validation}
                 onSubmit={(
                     values: Values,
                     { setSubmitting }: FormikHelpers<Values>

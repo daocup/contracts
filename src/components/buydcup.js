@@ -7,6 +7,7 @@ import ETHSale from '../abis/Ethsale.json';
 import BNBSale from '../abis/BNBSale.json';
 import Getdata from './Getdata';
 import Web3 from 'web3';
+
 async function loadExchange(networkId) {
   if (networkId === 97 || networkId === 56 || networkId === 1337) {
       return BNBSale
@@ -24,7 +25,7 @@ class BuyDcup extends Component {
         ethBalance: '0',
         tokenBalance: '0',
         loading: true,
-        rate: 100000,
+        rate: 0,
     };
     ABI_Object.buyTokens = ABI_Object.buyTokens.bind(this);
 }
@@ -65,7 +66,7 @@ async loadBlockchainData() {
   } else {
       window.alert('exchange contract not deployed to detected network.')
   }
-
+ //console.log(this.state.exchange);
   this.setState({loading: false})
 }
 
@@ -79,26 +80,7 @@ async loadWeb3() {
       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
   }
 }
-buyTokens = (lockDuration, etherAmount) => {
-  console.log(etherAmount)
-  this.setState({loading: true})
-  this.state.exchange.methods.buyTokens(lockDuration).send({
-      value: etherAmount,
-      from: this.state.account
-  }).on('transactionHash', (hash) => {
-      this.setState({loading: false})
-  }).on('receipt', (receipt) => {
-      const purchaseInfo = receipt.events.TokensPurchased.returnValues;
-      //    event TokensPurchased(
-      //         address account,
-      //         address wallet,
-      //         uint amount,
-      //         uint rate
-      //     );
-      const walletAddress = purchaseInfo.wallet;
-      console.log(walletAddress)
-  })
-}
+
 render() {
   let invest
   if (this.state.loading) {
@@ -108,7 +90,8 @@ render() {
     ethBalance={this.state.ethBalance}
     tokenBalance={this.state.tokenBalance}
     rate={this.state.rate}
-    buyTokens={this.buyTokens}
+    exchange = {this.state.exchange}
+    account ={this.state.account}
       />
   }
 
@@ -120,10 +103,14 @@ render() {
                     {invest}
                </Tab>
                <Tab eventKey="staking" title="Staking" disabled>
+               
                    <ReleaseForm />
+                   
                </Tab>
                <Tab eventKey="release" title="Release">
+               
                <ReleaseForm />
+               
                </Tab>
              </Tabs>
          </div>
