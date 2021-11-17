@@ -19,7 +19,7 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "types": [
       "@types/node",
       "@types/chai",
