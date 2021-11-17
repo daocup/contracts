@@ -11,9 +11,15 @@ import {
 } from '@mui/material';
 import { ReactComponent as LogoCircleSmall } from '../../assets/logo-circle-small.svg';
 import BorderLinearProgress from '../../components/BorderLinearProgress';
+import ListOfCoinPopover from '../../components/ListOfCoinPopover';
 
 const InvestTab = props => {
   const [formData, setFormData] = useState({ willGet: '1000 + 100 bonus', amount: '0.0' });
+  const [coinSelected, setCoinSelected] = useState({
+    id: 3,
+    name: 'DCup',
+    icon: <LogoCircleSmall />,
+  });
 
   return (
     <div className='form-container'>
@@ -90,8 +96,28 @@ const InvestTab = props => {
                 id='outlined-adornment-amount'
                 endAdornment={
                   <InputAdornment position='end'>
-                    <LogoCircleSmall />
-                    <Typography sx={{ color: '#fff' }} ml={1}>xDAI</Typography>
+                    <ListOfCoinPopover
+                      options={[
+                        {
+                          id: 1,
+                          name: 'BNB',
+                          icon: <LogoCircleSmall />,
+                        },
+                        {
+                          id: 2,
+                          name: 'ETH',
+                          icon: <LogoCircleSmall />,
+                        },
+                        {
+                          id: 3,
+                          name: 'DCup',
+                          icon: <LogoCircleSmall />,
+                        },
+                      ]}
+                      value={coinSelected}
+                      onChange={setCoinSelected}
+
+                    />
                   </InputAdornment>
                 }
 
