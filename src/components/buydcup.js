@@ -7,7 +7,7 @@ import ETHSale from '../abis/Ethsale.json';
 import BNBSale from '../abis/BNBSale.json';
 import Getdata from './Getdata';
 import Web3 from 'web3';
-
+import TokenTimeLock from '../abis/TokenTimeLock.json'
 async function loadExchange(networkId) {
   if (networkId === 97 || networkId === 56 || networkId === 1337) {
       return BNBSale
@@ -21,6 +21,7 @@ class BuyDcup extends Component {
     this.state = {
         account: '',
         token: {},
+        tokenLockWallet:{},
         exchange: {},
         ethBalance: '0',
         tokenBalance: '0',
@@ -29,6 +30,10 @@ class BuyDcup extends Component {
     };
     ABI_Object.buyTokens = ABI_Object.buyTokens.bind(this);
 }
+callbackFunction = (childData) => {
+  this.setState({loading: childData})
+}
+
 async UNSAFE_componentWillMount() {
   await this.loadWeb3()
   await this.loadBlockchainData()
@@ -43,13 +48,22 @@ async loadBlockchainData() {
 
   // Load Token
   const networkId = await web3.eth.net.getId()
+  const tokenLockData = TokenTimeLock.networks[networkId]
+  if (tokenLockData) {
+  const tokenLockWallet = new web3.eth.Contract(TokenTimeLock.abi, tokenLockData.address)
+  this.setState({tokenLockWallet});
+  }else {
+    window.alert('TokenLockData contract not deployed to detected network.')
+  }
   let Exchange = await loadExchange(networkId);
   const tokenData = Token.networks[networkId]
   if (tokenData) {
       const token = new web3.eth.Contract(Token.abi, tokenData.address)
+     
       this.setState({token});
       let tokenBalance = await token.methods.balanceOf(this.state.account).call()
       this.setState({tokenBalance: tokenBalance.toString()})
+     
   } else {
       window.alert('Token contract not deployed to detected network.')
   }
@@ -60,13 +74,12 @@ async loadBlockchainData() {
       const exchange = new web3.eth.Contract(Exchange.abi, exchangeData.address)
       const rate = await exchange.methods.rate().call();
       this.setState({rate});
-      console.log(rate)
+     
       this.setState({exchangeAddress: exchangeData})
       this.setState({exchange: exchange})
   } else {
       window.alert('exchange contract not deployed to detected network.')
   }
- //console.log(this.state.exchange);
   this.setState({loading: false})
 }
 
@@ -80,11 +93,10 @@ async loadWeb3() {
       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
   }
 }
-
 render() {
-  let invest
+  let invest,release
   if (this.state.loading) {
-    invest = <p id="loader" className="text-center">Loading...</p>
+    release = invest = <p id="loader" className="text-center">Loading...</p>
   } else {
     invest = <InvestForm
     ethBalance={this.state.ethBalance}
@@ -92,9 +104,20 @@ render() {
     rate={this.state.rate}
     exchange = {this.state.exchange}
     account ={this.state.account}
+    token = {this.state.token}
+    loading= {this.callbackFunction}
+      />
+    release = <ReleaseForm
+    ethBalance={this.state.ethBalance}
+   
+    rate={this.state.rate}
+    exchange = {this.state.exchange}
+    account ={this.state.account}
+    token = {this.state.token}
+    loading= {this.state.loading}
+    tokenLockWallet={this.state.tokenLockWallet}
       />
   }
-
   return (
     <>
          <div className="small-container">
@@ -104,12 +127,17 @@ render() {
                </Tab>
                <Tab eventKey="staking" title="Staking" disabled>
                
-                   <ReleaseForm />
+                   {/* <ReleaseForm 
+                    rate={this.state.rate}
+                    exchange = {this.state.exchange}
+                    account ={this.state.account}
+                    token = {this.state.token}
+                   /> */}
                    
                </Tab>
                <Tab eventKey="release" title="Release">
                
-               <ReleaseForm />
+               {release}
                
                </Tab>
              </Tabs>
