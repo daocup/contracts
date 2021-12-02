@@ -1,41 +1,31 @@
 import React, { Component } from 'react';
 import ProgressBar from "@ramonak/react-progress-bar";
-import logoinvest from "../INVEST.svg";
-import Getdata from "../components/Getdata";
-class BoxProgressBar extends Component {
+import InvestService from '../../services/InvestService';
+class DcupSole extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            output: '0',
-            lockDuration: 3,
-            rate: 0,
             getRemain:'0',
             total: 9000000000,
-            coin:'bnb',
-            defaultTitle: 'BNB',
-            defaultPhoto: './img/BNB-Icon-Logo.png',
-            isOpen: false,
         }
+        this.InvestService = new InvestService(this.props.exchange,this.props.account,this.props.token)
         
     }
     componentDidMount = () => {
-        let ABI_Object = new Getdata(this.props.exchange,this.props.account,this.props.token);
-        ABI_Object.getRemainSale().then(data => {
+        this.InvestService.getRemainSale().then(data => {
             const remain = window.web3.utils.fromWei(data, 'Ether')
-               this.setState({getRemain: remain.toString()})
+                this.setState({getRemain: remain.toString()})
              });
     }
     render() {
-       
-        let ABI_Object = new Getdata(this.props.exchange,this.props.account,this.props.token);
-        const sole = ABI_Object.getTotalSale(this.state.total,this.state.getRemain)
+        const sole = this.InvestService.getTotalSale(this.state.total,this.state.getRemain)
         const percentBuy = sole*100/this.state.total; 
       
         return (
             <div className="progress_bar">
                 <div className="p_top">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C15.5156 0 20 4.48006 20 10C20 15.5199 15.5156 20 10 20C4.48438 20 0 15.5199 0 10C0 4.48006 4.48438 0 10 0Z" fill="#1FF493" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M10 0C15.5156 0 20 4.48006 20 10C20 15.5199 15.5156 20 10 20C4.48438 20 0 15.5199 0 10C0 4.48006 4.48438 0 10 0Z" fill="#1FF493" />
                         <path d="M13.3816 13.4582V11.8569L10.0001 13.234L6.61865 11.8569V13.4582L8.91037 14.3869V14.7071C8.91037 15.3156 8.41356 15.796 7.8206 15.796H7.19559V16.5966H12.8367V15.796H12.2117C11.6027 15.796 11.122 15.2996 11.122 14.7071V14.3869L13.3816 13.4582Z" fill="#02172D" />
                         <path d="M13.3816 13.4582V11.8569L10.0001 13.234L6.61865 11.8569V13.4582L8.91037 14.3869V14.7071C8.91037 15.3156 8.41356 15.796 7.8206 15.796H7.19559V16.5966H12.8367V15.796H12.2117C11.6027 15.796 11.122 15.2996 11.122 14.7071V14.3869L13.3816 13.4582Z" fill="#02172D" />
                         <path d="M13.3814 13.4581V11.8569L10 13.2339V16.6124H12.8205V15.8118H12.1955C11.5865 15.8118 11.1057 15.3155 11.1057 14.723V14.4028L13.3814 13.4581Z" fill="#02172D" />
@@ -52,4 +42,4 @@ class BoxProgressBar extends Component {
     }
     
 }
-export default BoxProgressBar;
+export default DcupSole;

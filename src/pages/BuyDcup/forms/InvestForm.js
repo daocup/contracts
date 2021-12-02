@@ -1,95 +1,84 @@
 import React, { Component } from 'react';
-import ProgressBar from "@ramonak/react-progress-bar";
-import logoinvest from "../INVEST.svg";
-import Getdata from "../components/Getdata";
-import BoxProgressBar from "../components/BoxProgressBar";
-import SelectSearch from 'react-select-search';
+import logoinvest from "../../../assets/images/INVEST.svg";
+import InvestService from '../../../services/InvestService';
+import DcupSole from '../../../components/DcupSole/DcupSole';
 class InvestForm extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {
             output: '0',
             lockDuration: 3,
             rate: 0,
-            getRemain:'0',
-            total: 9000000000,
-            coin:'bnb',
+            coin: 'bnb',
             defaultTitle: 'BNB',
             defaultPhoto: './img/BNB-Icon-Logo.png',
             isOpen: false,
         }
-        
+        this.investService = new InvestService(this.props.exchange, this.props.account, this.props.token, this.props.loading);
     }
-    handleSelect = ( photo,coinTitle) => {
+    handleSelect = (photo, coinTitle) => {
         if (!this.state.isOpen) {
-          document.addEventListener('click', this.handleOutsideClick, false);
+            document.addEventListener('click', this.handleOutsideClick, false);
         } else {
-          document.removeEventListener('click', this.handleOutsideClick, false);
+            document.removeEventListener('click', this.handleOutsideClick, false);
         }
-    
-        this.setState(prevState => ({
-          isOpen: !prevState.isOpen,
-          defaultPhoto: photo,
-          defaultTitle: coinTitle,
-        }));
-      };
-      handleOpen = () => {
-        this.setState(prevState => ({
-          isOpen: !prevState.isOpen,
-        }));
-      }
-    
-       handleOutsideClick = () => {
-        this.handleSelect();
-      };
 
-    changeCoin(event){
-        this.setState({coin: event.target.value});
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen,
+            defaultPhoto: photo,
+            defaultTitle: coinTitle,
+        }));
+    };
+    handleOpen = () => {
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen,
+        }));
+    }
+
+    handleOutsideClick = () => {
+        this.handleSelect();
+    };
+
+    changeCoin(event) {
+        this.setState({ coin: event.target.value });
     }
 
     setLockDuration(event) {
-        this.setState({lockDuration: parseInt(event.target.value)})
-      }
-   
+        this.setState({ lockDuration: parseInt(event.target.value) })
+    }
+
     render() {
-        const { defaultPhoto, defaultTitle } = this.state; 
-        let ABI_Object = new Getdata(this.props.exchange,this.props.account,this.props.token,this.props.loading);
-       
+        const { defaultPhoto, defaultTitle } = this.state;
         const data = [
             {
-              coinTitle: 'BNB',
-              photo: './img/BNB-Icon-Logo.png',
+                coinTitle: 'BNB',
+                photo: './img/BNB-Icon-Logo.png',
             },
             {
 
                 coinTitle: 'ETH',
                 photo: './img/Ethereum.png',
             }
-          ];
-       
+        ];
+
         return (
-
-
-
-
             <div id="form_invest">
                 <div className="i_left">
                     <img src={logoinvest} />
                     <p>Buy tokens instantly</p>
                 </div>
-                <BoxProgressBar 
-                 exchange = {this.props.exchange}
-                 account ={this.props.account}
-                 token = {this.props.token}
+                <DcupSole
+                    exchange={this.props.exchange}
+                    account={this.props.account}
+                    token={this.props.token}
                 />
                 <form onSubmit={(event) => {
                     event.preventDefault()
                     let etherAmount
                     etherAmount = this.input.value.toString()
                     etherAmount = window.web3.utils.toWei(etherAmount, 'Ether')
-                    ABI_Object.buyTokens(this.state.lockDuration, etherAmount)
-                    //console.log(ABI_Object.getUserWallets());
+                    this.investService.buyTokens(this.state.lockDuration, etherAmount)
                 }}>
                     <div className="amount_input">
                         <label htmlFor="amout">
@@ -102,7 +91,7 @@ class InvestForm extends Component {
                             className="form-control"
                             onChange={(event) => {
                                 const etherAmount = Number(event.target.value)
-                              
+
                                 this.setState({
                                     output: etherAmount * this.props.rate
                                 })
@@ -111,30 +100,27 @@ class InvestForm extends Component {
                                 this.input = input
                             }}
                         />
-                        <span className="float-right text-muted">
-                            Balance: {window.web3.utils.fromWei(this.props.ethBalance, 'Ether')}
-                        </span>
                         <div className="r_icon">
-                        <div className='option-custom'>
-                            <div className='select-input' onClick={this.handleOpen}>
-                                <img alt="" src={defaultPhoto} />
-                                <span className="select-title">{defaultTitle}</span>
+                            <div className='option-custom'>
+                                <div className='select-input' onClick={this.handleOpen}>
+                                    <img alt="" src={defaultPhoto} />
+                                    <span className="select-title">{defaultTitle}</span>
                                 </div>
 
                                 {this.state.isOpen ?
-                                <div className='select-list'>
-                                    {data.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        onClick={() => this.handleSelect(data[index].photo,data[index].coinTitle)}
-                                        className='select-item'
-                                    >
-                                       <img alt="" src={item.photo} />
-                                        <span className='select-title'>{item.coinTitle}</span>
+                                    <div className='select-list'>
+                                        {data.map((item, index) => (
+                                            <div
+                                                key={index}
+                                                onClick={() => this.handleSelect(data[index].photo, data[index].coinTitle)}
+                                                className='select-item'
+                                            >
+                                                <img alt="" src={item.photo} />
+                                                <span className='select-title'>{item.coinTitle}</span>
+                                            </div>
+                                        ))}
                                     </div>
-                                    ))}
-                                </div>
-                                : ''
+                                    : ''
                                 }
                             </div>
                         </div>
@@ -150,15 +136,14 @@ class InvestForm extends Component {
                             disabled="disabled"
                             className="form-control"
                             value={this.state.output}
-                        // value={`${Number(values.amout)*1000} + ${(Number(values.bonus)*Number(values.amout)*10)} bonus`}
                         />
                         <span className="float-right text-muted">
-                            
-                
-              </span>
+
+
+                        </span>
                         <div className="r_icon">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C15.5156 0 20 4.48006 20 10C20 15.5199 15.5156 20 10 20C4.48438 20 0 15.5199 0 10C0 4.48006 4.48438 0 10 0Z" fill="#1FF493" />
+                                <path fillRule="evenodd" clipRule="evenodd" d="M10 0C15.5156 0 20 4.48006 20 10C20 15.5199 15.5156 20 10 20C4.48438 20 0 15.5199 0 10C0 4.48006 4.48438 0 10 0Z" fill="#1FF493" />
                                 <path d="M13.3816 13.4582V11.8569L10.0001 13.234L6.61865 11.8569V13.4582L8.91037 14.3869V14.7071C8.91037 15.3156 8.41356 15.796 7.8206 15.796H7.19559V16.5966H12.8367V15.796H12.2117C11.6027 15.796 11.122 15.2996 11.122 14.7071V14.3869L13.3816 13.4582Z" fill="#02172D" />
                                 <path d="M13.3816 13.4582V11.8569L10.0001 13.234L6.61865 11.8569V13.4582L8.91037 14.3869V14.7071C8.91037 15.3156 8.41356 15.796 7.8206 15.796H7.19559V16.5966H12.8367V15.796H12.2117C11.6027 15.796 11.122 15.2996 11.122 14.7071V14.3869L13.3816 13.4582Z" fill="#02172D" />
                                 <path d="M13.3814 13.4581V11.8569L10 13.2339V16.6124H12.8205V15.8118H12.1955C11.5865 15.8118 11.1057 15.3155 11.1057 14.723V14.4028L13.3814 13.4581Z" fill="#02172D" />
@@ -170,7 +155,7 @@ class InvestForm extends Component {
                     </div>
                     <div role="group" aria-labelledby="my-radio-group" className="group_bonus" onChange={this.setLockDuration.bind(this)}>
                         <div>
-                            <input type="radio" name="bonus" value="3" defaultChecked/>
+                            <input type="radio" name="bonus" value="3" defaultChecked />
                             <label>
                                 3 months<br />
                                 10% Bonus

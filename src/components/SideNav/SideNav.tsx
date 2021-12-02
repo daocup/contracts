@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "../logo.svg";
+import logo from "../../assets/images/logo.svg";
 import Web3 from "web3";
 import Web3Modal from "web3modal";
+import {PATH} from "../../constants/paths"
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { apiGetAccountAssets } from "../helpers/api";
+import { apiGetAccountAssets } from "../../helpers/api";
 import {
   getChainData
-} from "../helpers/utilities";
-import { IAssetData} from "../helpers/types";
+} from "../../helpers/utilities";
+import { IAssetData} from "../../helpers/types";
 import { BrowserRouter,NavLink } from "react-router-dom";
 import Fortmatic from "fortmatic";
 import Torus from "@toruslabs/torus-embed";
@@ -57,7 +58,7 @@ function initWeb3(provider: any) {
   return web3;
 }
 
-class NavBar extends React.Component<any, any> {
+class SideNav extends React.Component<any, any> {
   public web3Modal: Web3Modal;
   public state: IAppState;
 
@@ -192,10 +193,10 @@ class NavBar extends React.Component<any, any> {
         <div className="navbar-menu">
         <BrowserRouter>
             <ul>
-                <li><NavLink activeClassName='is-active' to='/Home'>Home</NavLink></li>
-                <li><NavLink activeClassName='is-active' to='/Whitepaper'>Whitepaper</NavLink></li>
-                <li><NavLink activeClassName='is-active' to='/#/buy-dcup'>Buy DCup</NavLink></li>
-                <li><NavLink activeClassName='is-active' to='/contact'>Contact</NavLink></li>
+                <li><NavLink activeClassName='is-active' exact to={PATH.HOME}>Home</NavLink></li>
+                <li><NavLink activeClassName='is-active' exact to='/Whitepaper'>Whitepaper</NavLink></li>
+                <li><NavLink activeClassName='is-active' exact to={PATH.BUYDCUP}>Buy DCup</NavLink></li>
+                <li><NavLink activeClassName='is-active' exact to='/contact'>Contact</NavLink></li>
                 <li className="btn_wallet"><button onClick={this.onConnect}>Connect Wallet</button></li>
             </ul>
             </BrowserRouter>
@@ -205,4 +206,4 @@ class NavBar extends React.Component<any, any> {
   }
 };
 
-export default NavBar;
+export default SideNav;

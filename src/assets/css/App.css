@@ -1,22 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap');
-body {
+body#body {
   background-color: #05050D;
   color:#fff;
   font-family: 'Work Sans', sans-serif;
   font-size: 16px;
 }
-a {text-decoration: none;}
-.navbar.navbar-light .navbar-brand {
+body#body a {text-decoration: none;}
+body#body .navbar.navbar-light .navbar-brand {
   margin-left: 65px;
   margin-top: 35px;
 }
-.navbar.navbar-light .navbar-menu {padding-top: 70px;}
-.navbar.navbar-light .navbar-menu ul {list-style: none;}
-.navbar.navbar-light .navbar-menu ul li {
+body#body .navbar.navbar-light .navbar-menu {padding-top: 70px;}
+body#body .navbar.navbar-light .navbar-menu ul {list-style: none;}
+body#body .navbar.navbar-light .navbar-menu ul li {
   float:left;
   margin-right: 40px;
 }
-.navbar.navbar-light .navbar-menu ul li a {
+body#body .navbar.navbar-light .navbar-menu ul li a,
+body#body li.btn_wallet button {
   font-family: 'Work Sans', sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -25,9 +26,10 @@ a {text-decoration: none;}
   text-align: center;
   color: #FFFFFF;
   position: relative;
+  text-decoration: initial;
 }
-.navbar.navbar-light .navbar-menu ul li a:hover::after,
-.navbar.navbar-light .navbar-menu ul li a.is-active::after
+body#body .navbar.navbar-light .navbar-menu ul li a:hover::after,
+body#body .navbar.navbar-light .navbar-menu ul li a.is-active::after
  {
   content: "";
   width: 100%;
@@ -37,11 +39,11 @@ a {text-decoration: none;}
   bottom: -18px;
   left: 0;
 }
-.navbar.navbar-light .navbar-menu ul li a:hover,
-.navbar.navbar-light .navbar-menu ul li a.is-active {
+body#body .navbar.navbar-light .navbar-menu ul li a:hover,
+body#body .navbar.navbar-light .navbar-menu ul li a.is-active {
   color: #1FF493;
 }
-li.btn_wallet {
+body#body li.btn_wallet {
   border: 2px solid #1FF493;
   box-sizing: border-box;
   border-radius: 50px;
@@ -52,20 +54,24 @@ li.btn_wallet {
   position: relative;
   top: -19px;
 }
-.small-container {
+body#body li.btn_wallet button {
+  background: transparent;
+  border: 0;
+}
+body#body .small-container {
   margin: 0 auto;
   margin-top: 110px;
   max-width: 566px;
 
 }
-.nav-tabs {
+body#body .nav-tabs {
   display: flex;
   justify-content: center;
   border: 0;
   margin-bottom: 30px !important;
   position: relative;
 }
-.nav-tabs .nav-link {
+body#body .nav-tabs .nav-link {
   font-family: 'Work Sans', sans-serif;
 font-style: normal;
 font-weight: 500;
@@ -75,23 +81,24 @@ text-align: center;
 color: #FFFFFF;
 padding: 7px 36px;
 }
-.nav-tabs .nav-item {
+body#body .nav-tabs .nav-item {
   padding: 0 12px;
 }
-.nav-tabs .nav-link.active,.nav-tabs .nav-link:hover {
+body#body .nav-tabs .nav-link.active,
+body#body .nav-tabs .nav-link:hover {
   background:transparent;
   color: #fff;
   border: 2px solid #1FF493;
 box-sizing: border-box;
 border-radius: 40px;
 }
-.tab-content {
+body#body .tab-content {
 background: #20354C;
 border-radius: 10px;
 padding: 45px 36px;
 }
-.i_left {position: relative;width: 40%;float: left;}
-.i_left:after {
+body#body .i_left {position: relative;width: 40%;float: left;}
+body#body .i_left:after {
   content: "";
   width: 1px;
   height: 49px;
@@ -100,15 +107,15 @@ padding: 45px 36px;
   top: 0;
   right: 0;
 }
-.i_left img {
+body#body .i_left img {
   margin-bottom: 15px;
 }
-.progress_bar {
+body#body .progress_bar {
   width: 53%;
   float: right;
   font-size: 12px;
 }
-.progress_bar .p_top {
+body#body .progress_bar .p_top {
 font-style: normal;
 font-weight: normal;
 font-size: 12px;
@@ -116,7 +123,7 @@ line-height: 150%;
 color: #FFFFFF;
 margin-bottom: 8px;
 }
-.progress_bar .p_bottom span{
+body#body .progress_bar .p_bottom span{
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -125,10 +132,11 @@ margin-bottom: 8px;
   color: #91A3B5;
   float:right;
 }
-.progress_bar .p_top svg {margin-right: 8px;}
-.progress_bar .p_top div {float: right;}
-.progress_bar .p_top div span {color: #1FF493;}
-.amount_input,.getamount_input {
+body#body .progress_bar .p_top svg {margin-right: 8px;}
+body#body .progress_bar .p_top div {float: right;}
+body#body .progress_bar .p_top div span {color: #1FF493;}
+body#body .amount_input,
+body#body .getamount_input {
   display: inline-block;
   width: 100%;
   border: 1px solid #000;
@@ -139,7 +147,7 @@ margin-bottom: 8px;
   padding: 10px 24px;
   margin-bottom: 26px;
 }
-.amount_input label,.getamount_input label {
+body#body .amount_input label,.getamount_input label {
 font-style: normal;
 font-weight: normal;
 font-size: 14px;
@@ -147,8 +155,8 @@ line-height: 150%;
 color: #91A3B5;
 width: 100%;
 }
-.amount_input .form-control,
-.getamount_input .form-control {
+body#body .amount_input .form-control,
+body#body .getamount_input .form-control {
   width: 80%;
     float: left;
     background: transparent;
