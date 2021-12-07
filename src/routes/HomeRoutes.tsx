@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react"
+import React from "react"
 import { Switch, Route } from "react-router-dom"
 import { PATH } from "../constants/paths"
 import Home from "../pages/Home/Home"

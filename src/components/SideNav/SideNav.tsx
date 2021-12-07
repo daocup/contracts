@@ -41,10 +41,8 @@ const INITIAL_STATE: IAppState = {
   pendingRequest: false,
   result: null
 };
-
 function initWeb3(provider: any) {
   const web3: any = new Web3(provider);
-
   web3.eth.extend({
     methods: [
       {
@@ -54,27 +52,22 @@ function initWeb3(provider: any) {
       }
     ]
   });
-
   return web3;
 }
-
 class SideNav extends React.Component<any, any> {
   public web3Modal: Web3Modal;
   public state: IAppState;
-
   constructor(props: any) {
     super(props);
     this.state = {
       ...INITIAL_STATE
     };
-
     this.web3Modal = new Web3Modal({
       network: this.getNetwork(),
       cacheProvider: true,
       providerOptions: this.getProviderOptions()
     });
   }
-
   public componentDidMount() {
     if (this.web3Modal.cachedProvider) {
       this.onConnect();
@@ -82,19 +75,12 @@ class SideNav extends React.Component<any, any> {
   }
   public onConnect = async () => {
     const provider = await this.web3Modal.connect();
-
     await this.subscribeProvider(provider);
-
     const web3: any = initWeb3(provider);
-
     const accounts = await web3.eth.getAccounts();
-
     const address = accounts[0];
-
     const networkId = await web3.eth.net.getId();
-
     const chainId = await web3.eth.chainId();
-
     await this.setState({
       web3,
       provider,
@@ -120,7 +106,6 @@ class SideNav extends React.Component<any, any> {
       await this.setState({ chainId, networkId });
       await this.getAccountAssets();
     });
-
     provider.on("networkChanged", async (networkId: number) => {
       const { web3 } = this.state;
       const chainId = await web3.eth.chainId();
@@ -128,9 +113,7 @@ class SideNav extends React.Component<any, any> {
       await this.getAccountAssets();
     });
   };
-
   public getNetwork = () => getChainData(this.state.chainId).network;
-
   public getProviderOptions = () => {
     const providerOptions = {
       walletconnect: {
@@ -161,7 +144,6 @@ class SideNav extends React.Component<any, any> {
     };
     return providerOptions;
   };
-
   public getAccountAssets = async () => {
     const { address, chainId } = this.state;
     this.setState({ fetching: true });
@@ -183,12 +165,11 @@ class SideNav extends React.Component<any, any> {
     await this.web3Modal.clearCachedProvider();
     this.setState({ ...INITIAL_STATE });
   };
-
   render = () => {
     return (
       <nav className="navbar navbar-light">
         <div className="navbar-brand">
-          <img src={logo}/>
+          <img alt="logo" src={logo}/>
         </div>
         <div className="navbar-menu">
         <BrowserRouter>
@@ -205,5 +186,4 @@ class SideNav extends React.Component<any, any> {
     );
   }
 };
-
 export default SideNav;

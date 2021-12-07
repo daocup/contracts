@@ -7,8 +7,6 @@ class InvestService extends Component {
         this.token = token;
         this.loading = loading;
     }
-  
-   
     buyTokens = (lockDuration, etherAmount) => {
         const sendBackData = () => {
             this.loading(true);
@@ -22,7 +20,6 @@ class InvestService extends Component {
                 this.loading(false);
             }
             sendBackData()
-            
             const purchaseInfo = receipt.events.TokensPurchased.returnValues;
             //    event TokensPurchased(
             //         address account,
@@ -34,7 +31,6 @@ class InvestService extends Component {
             console.log(walletAddress)
         })
     }
-
     getRemainSale = async() => {
         const getRemain = await this.token.methods.allowance(this.account,this.exchange._address).call()
         return  getRemain       
@@ -43,5 +39,4 @@ class InvestService extends Component {
         return (total - remainSale)
     }
 }
-
 export default InvestService;

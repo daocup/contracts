@@ -1,29 +1,33 @@
 import { Component } from 'react'
+import TokenTimeLock from '../abis/TokenTimeLock.json'; 
 class ReleaseService extends Component {
-    constructor(exchange, account, tokenLockWallet) {
-        super(exchange, account, tokenLockWallet)
+    constructor(exchange, account) {
+        super(exchange, account)
         this.exchange = exchange;
         this.account = account;
-        this.tokenLockWallet = tokenLockWallet;
     }
-
     getUserWallets = async () => {
         const userWallets = await this.exchange.methods.getWallets().call();
         return userWallets;
     }
-    getWallet = async () => {
-        const getWallet = await this.tokenLockWallet.methods.lockData().call({
-            from: this.account
-        });
+    
+    getWallet = async (address) => {
+       
+        const web3 = window.web3
+        const lockWallet = new web3.eth.Contract(TokenTimeLock.abi,address)
+        const getWallet = await lockWallet.methods.lockData().call();
         return getWallet
     }
-    Release = (address) => {
-        //console.log(address);
-        this.tokenLockWallet.methods.release().send({
-            from: this.account
-        });
+    Release = async(address) => {
+        try {
+        const web3 = window.web3
+        const lockWallet = new web3.eth.Contract(TokenTimeLock.abi,address)
+        const release = await lockWallet.methods.release().call();
+        return release
+        } catch (e){
+            console.log(e.message);
+        }
+      
     }
-
 }
-
 export default ReleaseService;

@@ -169,6 +169,11 @@ body#body .getamount_input .form-control {
     color: #FFFFFF;
     padding: 0;
 }
+.vanta-canvas {
+  z-index:-1 !important;
+  height: 100% !important;
+  width: 100% !important;
+}
 .r_icon {
   float: right;
 }
@@ -271,7 +276,9 @@ margin-bottom: 22px;
 .p_30 {width: 30%; padding: 0 1px;text-align: center;}
 .p_20 {width: 20%; padding: 0 1px;text-align: center;}
 .p_10 {width: 10%; padding: 0 1px;text-align: center;}
-.p_40 span,.p_30 span,.p_20 span,.p_10 span {
+.p_7 {width: 7%; padding: 0 1px;text-align: center;}
+.p_3 {width: 3%; padding: 0 1px;text-align: center;}
+.p_40 span,.p_30 span,.p_20 span,.p_10 span,.p_7 span,.p_3 span {
   font-size: 12px;
   line-height: 18px;
   margin-top: 5px;

@@ -17,6 +17,19 @@ class InvestForm extends Component {
         }
         this.investService = new InvestService(this.props.exchange, this.props.account, this.props.token, this.props.loading);
     }
+    Onsubmit = (event) => {
+        event.preventDefault()
+        let etherAmount
+        etherAmount = this.input.value.toString()
+        etherAmount = window.web3.utils.toWei(etherAmount, 'Ether')
+        this.investService.buyTokens(this.state.lockDuration, etherAmount)
+    }
+    Onchange = (event) => {
+        const etherAmount = Number(event.target.value)
+        this.setState({
+            output: etherAmount * this.props.rate
+        })
+    }
     handleSelect = (photo, coinTitle) => {
         if (!this.state.isOpen) {
             document.addEventListener('click', this.handleOutsideClick, false);
@@ -65,7 +78,7 @@ class InvestForm extends Component {
         return (
             <div id="form_invest">
                 <div className="i_left">
-                    <img src={logoinvest} />
+                    <img alt="logoinvest" src={logoinvest} />
                     <p>Buy tokens instantly</p>
                 </div>
                 <DcupSole
@@ -73,13 +86,7 @@ class InvestForm extends Component {
                     account={this.props.account}
                     token={this.props.token}
                 />
-                <form onSubmit={(event) => {
-                    event.preventDefault()
-                    let etherAmount
-                    etherAmount = this.input.value.toString()
-                    etherAmount = window.web3.utils.toWei(etherAmount, 'Ether')
-                    this.investService.buyTokens(this.state.lockDuration, etherAmount)
-                }}>
+                <form onSubmit={this.Onsubmit}>
                     <div className="amount_input">
                         <label htmlFor="amout">
                             Amount
@@ -89,13 +96,7 @@ class InvestForm extends Component {
                             name="amout"
                             placeholder="0.0"
                             className="form-control"
-                            onChange={(event) => {
-                                const etherAmount = Number(event.target.value)
-
-                                this.setState({
-                                    output: etherAmount * this.props.rate
-                                })
-                            }}
+                            onChange={this.Onchange}
                             ref={(input) => {
                                 this.input = input
                             }}
