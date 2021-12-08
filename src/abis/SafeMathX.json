@@ -10,7 +10,7 @@
   "sourceMap": "116:456:28:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "116:456:28:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\nimport \"@openzeppelin/contracts/utils/math/SafeMath.sol\";\n\nlibrary SafeMathX {\n    using SafeMath for uint256;\n    // Calculate x * y / scale rounding down.\n    function mulScale(\n        uint256 x,\n        uint256 y,\n        uint128 scale\n    ) internal pure returns (uint256) {\n        uint256 a = x.div(scale);\n        uint256 b = x.mod(scale);\n        uint256 c = y.div(scale);\n        uint256 d = y.mod(scale);\n\n        return a.mul(c).mul(scale).add(a.mul(d).add(b.mul(c)).add((b.mul(d).div(scale))));\n    }\n}\n",
-  "sourcePath": "/Users/bean/WebstormProjects/cup-contracts/contracts/math/SafeMathX.sol",
+  "sourcePath": "/Users/cuongnguyen/contracts/contracts/math/SafeMathX.sol",
   "ast": {
     "absolutePath": "project:/contracts/math/SafeMathX.sol",
     "exportedSymbols": {
@@ -2249,7 +2249,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-16T02:26:38.413Z",
+  "updatedAt": "2021-12-01T02:54:39.968Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
