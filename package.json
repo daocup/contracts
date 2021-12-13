@@ -80,6 +80,7 @@
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.3",
     "react-select-search": "^3.0.9",
+    "validator": "^13.7.0",
     "web3": "1.6.1",
     "web3modal": "^1.9.4"
   },

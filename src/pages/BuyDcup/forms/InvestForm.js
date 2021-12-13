@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logoinvest from "../../../assets/images/INVEST.svg";
 import InvestService from '../../../services/InvestService';
 import DcupSole from '../../../components/DcupSole/DcupSole';
+import ValidatorService from '../../../services/ValidatorService';
 class InvestForm extends Component {
 
     constructor(props) {
@@ -15,17 +16,32 @@ class InvestForm extends Component {
             defaultTitle: 'BNB',
             defaultPhoto: './img/BNB-Icon-Logo.png',
             isOpen: false,
+            errors: {},
         }
         this.investService = new InvestService(this.props.exchange, this.props.account, this.props.token, this.props.loading);
+        const requiredWith = (value, field, state) => (!state[field] && !value) || !!value;
+        const rules = [
+            {
+              field: 'amout',
+              method: 'isEmpty',
+              validWhen: false,
+              message: 'The amout field is required.',
+            },
+          ];
+          this.validator = new ValidatorService(rules);
     }
      
     Onsubmit = (event) => {
-    
+        this.setState({
+            errors: this.validator.validate(this.state),
+        });
         event.preventDefault()
+        if(this.input.value) {
         let etherAmount
         etherAmount = this.input.value.toString()
         etherAmount = window.web3.utils.toWei(etherAmount, 'Ether')
         this.investService.buyTokens(this.state.lockDuration, etherAmount)
+        }
     }
     Onchange = (event) => {
       
@@ -82,7 +98,7 @@ class InvestForm extends Component {
 
     render() {
        
-        const { defaultPhoto, defaultTitle } = this.state;
+        const { defaultPhoto, defaultTitle, errors } = this.state;
         const data = [
             {
                 coinTitle: 'BNB',
@@ -121,6 +137,7 @@ class InvestForm extends Component {
                                 this.input = input
                             }}
                         />
+                     
                         <div className="r_icon">
                             <div className='option-custom'>
                                 <div className='select-input' onClick={this.handleOpen}>
@@ -146,6 +163,7 @@ class InvestForm extends Component {
                             </div>
                         </div>
                     </div>
+                    {errors.amout && <p className="validation" style={{display: 'block'}}>{errors.amout}</p>}
                     <div className="getamount_input">
                         <label htmlFor="getamount">
                             You will get
