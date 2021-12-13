@@ -7,9 +7,10 @@ class InvestForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            output: '0',
+            tokenAmount: 0,
             lockDuration: 3,
             rate: 0,
+            reward: 0.1,
             coin: 'bnb',
             defaultTitle: 'BNB',
             defaultPhoto: './img/BNB-Icon-Logo.png',
@@ -17,7 +18,9 @@ class InvestForm extends Component {
         }
         this.investService = new InvestService(this.props.exchange, this.props.account, this.props.token, this.props.loading);
     }
+     
     Onsubmit = (event) => {
+    
         event.preventDefault()
         let etherAmount
         etherAmount = this.input.value.toString()
@@ -25,9 +28,10 @@ class InvestForm extends Component {
         this.investService.buyTokens(this.state.lockDuration, etherAmount)
     }
     Onchange = (event) => {
+      
         const etherAmount = Number(event.target.value)
         this.setState({
-            output: etherAmount * this.props.rate
+            tokenAmount: etherAmount * this.props.rate  
         })
     }
     handleSelect = (photo, coinTitle) => {
@@ -57,11 +61,27 @@ class InvestForm extends Component {
         this.setState({ coin: event.target.value });
     }
 
-    setLockDuration(event) {
-        this.setState({ lockDuration: parseInt(event.target.value) })
+    setLockDuration(e) {
+        if( parseInt(e.target.value) === 3) {
+            this.setState({
+                reward: 0.1
+            });
+        }
+        if( parseInt(e.target.value) === 6) {
+            this.setState({
+                reward: 0.2
+            });
+        }
+        if( parseInt(e.target.value) === 12) {
+            this.setState({
+                reward: 0.5
+            });
+        }
+        this.setState({ lockDuration: parseInt(e.target.value) })
     }
 
     render() {
+       
         const { defaultPhoto, defaultTitle } = this.state;
         const data = [
             {
@@ -136,7 +156,7 @@ class InvestForm extends Component {
                             name="getamount"
                             disabled="disabled"
                             className="form-control"
-                            value={this.state.output}
+                            value={this.state.tokenAmount + (this.state.tokenAmount*this.state.reward)}
                         />
                         <span className="float-right text-muted">
 

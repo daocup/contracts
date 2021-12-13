@@ -26,27 +26,29 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Buy DAOCup</title>
-    
-    <script>
-    VANTA.HALO({
-      el: '#root',
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      baseColor: 0x11eb8e,
-      backgroundColor: 0x21020,
-      amplitudeFactor: 0.00,
-      xOffset: 0.16,
-      yOffset: -0.11,
-      size: 2.00
-    })
-    </script>
   </head>
+  
   <body id="body">
+    <script>
+      VANTA.HALO({
+        el:'body',
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 1080.00,
+        minWidth: 1920.00,
+        baseColor: 0x11eb8e,
+        backgroundColor: 0x21020,
+        amplitudeFactor: 0.00,
+        xOffset: 0.16,
+        yOffset: -0.11,
+        size: 2.00
+      })
+      </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+     
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -57,5 +59,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+   
   </body>
 </html>
