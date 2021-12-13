@@ -108,6 +108,7 @@ body#body .tab-content {
 background: #20354C;
 border-radius: 10px;
 padding: 45px 36px;
+min-height: 400px;
 }
 body#body .i_left {position: relative;width: 40%;float: left;}
 body#body .i_left:after {
