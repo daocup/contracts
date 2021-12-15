@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios'
 import { IAssetData, IGasPrices, IParsedTx } from './types'
 
 const api: AxiosInstance = axios.create({
-  baseURL: 'https://ethereum-api.xyz',
+  baseURL: 'http://localhost:8545',
   timeout: 30000, // 30 secs
   headers: {
     Accept: 'application/json',

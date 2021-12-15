@@ -19,7 +19,6 @@ class InvestForm extends Component {
             errors: {},
         }
         this.investService = new InvestService(this.props.exchange, this.props.account, this.props.token, this.props.loading);
-        const requiredWith = (value, field, state) => (!state[field] && !value) || !!value;
         const rules = [
             {
               field: 'amout',

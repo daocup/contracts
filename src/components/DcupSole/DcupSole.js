@@ -13,9 +13,13 @@ class DcupSole extends Component {
     }
     componentDidMount = () => {
         this.InvestService.getRemainSale().then(data => {
-            const remain = window.web3.utils.fromWei(data, 'Ether')
-                this.setState({getRemain: remain.toString()})
-             });
+            if(data) {
+                const remain = window.web3.utils.fromWei(data, 'Ether')
+                    this.setState({getRemain: remain.toString()})
+                }
+                });
+            
+
     }
     render() {
         const sole = this.InvestService.getTotalSale(this.state.total,this.state.getRemain)

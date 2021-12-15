@@ -115,7 +115,6 @@ export function getChainData(chainId: number): IChainData {
   }
 
   const API_KEY = process.env.REACT_APP_INFURA_ID;
-
   if (
     chainData.rpc_url.includes("infura.io") &&
     chainData.rpc_url.includes("%API_KEY%") &&

@@ -7,8 +7,12 @@ class ReleaseService extends Component {
         this.account = account;
     }
     getUserWallets = async () => {
-        const userWallets = await this.exchange.methods.getWallets().call();
-        return userWallets;
+       
+        if( Object.keys(this.exchange).length !== 0) {
+            const userWallets = await this.exchange.methods.getWallets().call();
+            return userWallets;
+        }
+        
     }
     
     getWallet = async (address) => {

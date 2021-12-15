@@ -19,19 +19,20 @@ class ReleaseForm extends Component {
     componentDidMount() {
         let arrayResult = []
         this.releaseService.getUserWallets().then(data => {
-            
-            data.map(item=> {
-                
-               this.releaseService.getWallet(item).then(result=>{
+            if(data) {
+                data.map(item=> {
                     
-                    let itemTemple = {
-                        key: item,
-                        dataResult: result
-                    }
-                    arrayResult.push(itemTemple)
-                    this.setState({listRelease: arrayResult})
+                this.releaseService.getWallet(item).then(result=>{
+                        
+                        let itemTemple = {
+                            key: item,
+                            dataResult: result
+                        }
+                        arrayResult.push(itemTemple)
+                        this.setState({listRelease: arrayResult})
+                    })
                 })
-            })
+            }
         })
        
         
