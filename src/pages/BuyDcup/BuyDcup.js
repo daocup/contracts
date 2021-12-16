@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import InvestForm from './forms/InvestForm';
 import ReleaseForm from './forms/ReleaseForm';
 import Token from '../../abis/CUP.json'
-import ETHSale from '../../abis/Ethsale.json';
+import ETHSale from '../../abis/EthSale.json';
 import BNBSale from '../../abis/BNBSale.json';
 import TokenTimeLock from '../../abis/TokenTimeLock.json'
 import Web3 from 'web3';
