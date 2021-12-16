@@ -32,8 +32,10 @@ class InvestService extends Component {
         })
     }
     getRemainSale = async() => {
-        const getRemain = await this.token.methods.allowance(this.account,this.exchange._address).call()
-        return  getRemain       
+        if( Object.keys(this.token).length !== 0) {
+            const getRemain = await this.token.methods.allowance(this.account,this.exchange._address).call()
+            return  getRemain  
+        }     
     }
     getTotalSale = (total, remainSale ) => {
         return (total - remainSale)

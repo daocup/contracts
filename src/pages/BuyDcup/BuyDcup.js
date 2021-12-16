@@ -7,6 +7,7 @@ import ETHSale from '../../abis/Ethsale.json';
 import BNBSale from '../../abis/BNBSale.json';
 import TokenTimeLock from '../../abis/TokenTimeLock.json'
 import Web3 from 'web3';
+import Web3Modal from "web3modal";
 import MainLayout from "../../layouts/MainLayout"
 
 async function loadExchange(networkId) {
@@ -17,6 +18,7 @@ async function loadExchange(networkId) {
 }
 
 class BuyDcup extends Component {
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -24,8 +26,7 @@ class BuyDcup extends Component {
       token: {},
       tokenLockWallet: {},
       exchange: {},
-      ethBalance: '0',
-      tokenBalance: '0',
+    
       loading: true,
       rate: 0,
     };
@@ -35,17 +36,19 @@ class BuyDcup extends Component {
   }
 
   async UNSAFE_componentWillMount() {
-    await this.loadWeb3()
-    await this.loadBlockchainData()
+   await this.loadWeb3()
+   if (window.web3) {
+     await this.loadBlockchainData()
+   }
   }
+  
   async loadBlockchainData() {
+   
     const web3 = window.web3
     const accounts = await web3.eth.getAccounts()
-    this.setState({ account: accounts[0] })
-
-    const ethBalance = await web3.eth.getBalance(this.state.account)
-    this.setState({ ethBalance })
-
+    if (accounts.length !== 0) {
+      this.setState({ account: accounts[0] })
+    
     // Load Token
     const networkId = await web3.eth.net.getId()
     const tokenLockData = TokenTimeLock.networks[networkId]
@@ -80,33 +83,35 @@ class BuyDcup extends Component {
     } else {
       window.alert('exchange contract not deployed to detected network.')
     }
-    this.setState({ loading: false })
+    //console.log(this.state.loading)
+     this.setState({ loading: false })
+    }
   }
 
   async loadWeb3() {
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
+        window.web3 = new Web3(window.ethereum)
+       // await window.ethereum.enable()
     } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider)
+        window.web3 = new Web3(window.web3.currentProvider)
     } else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+        window.alert('Non-Ethereum browser detected. You should consider trying MetaMask! https://metamask.io/download.html')
     }
-  }
+}
   render() {
     let invest, release
+   console.log(this.state.loading)
     if (this.state.loading) {
       invest = release = <p id="loader" className="text-center" > Loading...</p>
     } else {
       invest = <InvestForm
-                ethBalance={this.state.ethBalance}
-                tokenBalance={this.state.tokenBalance}
-                rate={this.state.rate}
-                exchange={this.state.exchange}
-                account={this.state.account}
-                token={this.state.token}
-                loading={this.callbackFunction}
-              />
+
+      rate={this.state.rate}
+      exchange={this.state.exchange}
+      account={this.state.account}
+      token={this.state.token}
+      loading={this.callbackFunction}
+    />
       release = <ReleaseForm
                   exchange={this.state.exchange}
                   account={this.state.account}
@@ -128,11 +133,11 @@ class BuyDcup extends Component {
                 <Tab eventKey="release" title="Release" >
                   {release}
                 </Tab>
-                </Tabs>
-                </div>
-                </MainLayout>
-                </>
-                );
+            </Tabs>
+          </div>
+        </MainLayout>
+      </>
+    );
   }
 }
 export default BuyDcup;
