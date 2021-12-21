@@ -47,6 +47,7 @@ class SideNav extends React.Component<any, any> {
   };
   
   public getNetwork = () => getChainData(this.state.chainId).network;
+
   public getProviderOptions = () => {
   
     const providerOptions = {
@@ -89,7 +90,7 @@ class SideNav extends React.Component<any, any> {
         <div className="navbar-menu">
         <BrowserRouter>
             <ul>
-                <li><NavLink activeClassName='is-active' exact to={PATH.HOME}>Home</NavLink></li>
+                <li><NavLink activeClassName='is-active' exact to='/home'>Home</NavLink></li>
                 <li><NavLink activeClassName='is-active' exact to='/Whitepaper'>Whitepaper</NavLink></li>
                 <li><NavLink activeClassName='is-active' exact to={PATH.BUYDCUP}>Buy DCup</NavLink></li>
                 <li><NavLink activeClassName='is-active' exact to='/contact'>Contact</NavLink></li>

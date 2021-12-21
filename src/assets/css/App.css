@@ -188,7 +188,7 @@ body#body .getamount_input .form-control {
   width: 100% !important;
 }
 .r_icon {
-  float: right;
+  float: left;
 }
 .r_icon svg {
   margin-right: 15px;
@@ -321,3 +321,14 @@ width: 115px;
 height: 48px;
 margin-top: 17px;
 }
+.option-custom {position: relative;}
+.option-custom img {margin-right: 15px;}
+.option-custom .select-list {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  background: #fff;
+  color: #222;
+  padding: 10px;
+}
+.option-custom .select-list .select-item {margin-bottom: 10px;cursor: pointer;}

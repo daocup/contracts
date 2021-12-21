@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Tabs, Tab } from 'react-bootstrap';
 import InvestForm from './forms/InvestForm';
+import InvestFormDefault from './forms/investFormDefault';
 import ReleaseForm from './forms/ReleaseForm';
 import Token from '../../abis/CUP.json'
 import ETHSale from '../../abis/Ethsale.json';
 import BNBSale from '../../abis/BNBSale.json';
 import TokenTimeLock from '../../abis/TokenTimeLock.json'
 import Web3 from 'web3';
-import Web3Modal from "web3modal";
 import MainLayout from "../../layouts/MainLayout"
 
 async function loadExchange(networkId) {
@@ -51,6 +51,7 @@ class BuyDcup extends Component {
     
     // Load Token
     const networkId = await web3.eth.net.getId()
+    console.log('networkId',networkId)
     const tokenLockData = TokenTimeLock.networks[networkId]
     if (tokenLockData) {
       const tokenLockWallet = new web3.eth.Contract(TokenTimeLock.abi, tokenLockData.address)
@@ -100,9 +101,9 @@ class BuyDcup extends Component {
 }
   render() {
     let invest, release
-   console.log(this.state.loading)
     if (this.state.loading) {
-      invest = release = <p id="loader" className="text-center" > Loading...</p>
+      invest = <InvestFormDefault/>
+      release = <p id="loader" className="text-center" > Loading...</p>
     } else {
       invest = <InvestForm
 

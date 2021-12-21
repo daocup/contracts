@@ -21,18 +21,11 @@ class InvestService extends Component {
             }
             sendBackData()
             const purchaseInfo = receipt.events.TokensPurchased.returnValues;
-            //    event TokensPurchased(
-            //         address account,
-            //         address wallet,
-            //         uint amount,
-            //         uint rate
-            //     );
             const walletAddress = purchaseInfo.wallet;
-            console.log(walletAddress)
         })
     }
     getRemainSale = async() => {
-        if( Object.keys(this.token).length !== 0) {
+        if(Object.keys(this.token).length !== 0) {
             const getRemain = await this.token.methods.allowance(this.account,this.exchange._address).call()
             return  getRemain  
         }     
