@@ -9,7 +9,6 @@ class DcupSole extends Component {
             total: 9000000000,
         }
         this.InvestService = new InvestService(this.props.exchange,this.props.account,this.props.token)
-        
     }
     componentDidMount = () => {
         this.InvestService.getRemainSale().then(data => {
