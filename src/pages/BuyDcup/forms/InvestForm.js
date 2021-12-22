@@ -17,7 +17,7 @@ class InvestForm extends Component {
             isOpen: false,
             errors: {},
         }
-        this.investService = new InvestService(this.props.exchange, this.props.account, this.props.token, this.props.loading);
+        this.investService = new InvestService(this.props.exchange, this.props.exchangeOwner, this.props.account, this.props.token, this.props.loading);
         const rules = [
             {
               field: 'amout',
@@ -119,6 +119,7 @@ class InvestForm extends Component {
                     exchange={this.props.exchange}
                     account={this.props.account}
                     token={this.props.token}
+                    exchangeOwner={this.props.exchangeOwner}
                 />
                 <form onSubmit={this.Onsubmit}>
                     <div className="amount_input">

@@ -1,8 +1,9 @@
 import {Component} from 'react'
 class InvestService extends Component {
-    constructor(exchange,account,token,loading) {
-        super(exchange,account,token,loading)
+    constructor(exchange, exchangeOwner, account,token,loading) {
+        super(exchange, exchangeOwner, account,token,loading)
         this.exchange = exchange;
+        this.exchangeOwner = exchangeOwner;
         this.account = account;
         this.token = token;
         this.loading = loading;
@@ -26,7 +27,7 @@ class InvestService extends Component {
     }
     getRemainSale = async() => {
         if(Object.keys(this.token).length !== 0) {
-            const getRemain = await this.token.methods.allowance(this.account,this.exchange._address).call()
+            const getRemain = await this.token.methods.allowance(this.exchangeOwner ,this.exchange._address).call()
             return  getRemain  
         }     
     }

@@ -10,6 +10,7 @@ import TokenTimeLock from '../../abis/TokenTimeLock.json'
 import Web3 from 'web3';
 import MainLayout from "../../layouts/MainLayout"
 
+const EXCHANGE_OWNER = "0x0Ff1f5Cf73D56DD5e6852fdf0b08F76cB6FA861e";
 async function loadExchange(networkId) {
   if (networkId === 97 || networkId === 56 || networkId === 1337) {
     return BNBSale
@@ -105,8 +106,7 @@ class BuyDcup extends Component {
       invest = <InvestFormDefault/>
       release = <p id="loader" className="text-center" > Loading...</p>
     } else {
-      invest = <InvestForm
-
+      invest = <InvestForm exchangeOwner={EXCHANGE_OWNER}
       rate={this.state.rate}
       exchange={this.state.exchange}
       account={this.state.account}
@@ -115,6 +115,7 @@ class BuyDcup extends Component {
     />
       release = <ReleaseForm
                   exchange={this.state.exchange}
+                  exchangeOwner={EXCHANGE_OWNER}
                   account={this.state.account}
                   token={this.state.token}
                   tokenLockWallet={this.state.tokenLockWallet}

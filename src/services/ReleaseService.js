@@ -7,16 +7,15 @@ class ReleaseService extends Component {
         this.account = account;
     }
     getUserWallets = async () => {
-       
         if( Object.keys(this.exchange).length !== 0) {
             const userWallets = await this.exchange.methods.getWallets().call();
+            console.log(userWallets)
             return userWallets;
         }
         
     }
     
     getWallet = async (address) => {
-       
         const web3 = window.web3
         const lockWallet = new web3.eth.Contract(TokenTimeLock.abi,address)
         const getWallet = await lockWallet.methods.lockData().call();

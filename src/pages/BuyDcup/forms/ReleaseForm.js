@@ -51,6 +51,7 @@ class ReleaseForm extends Component {
                         exchange={this.props.exchange}
                         account={this.props.account}
                         token={this.props.token}
+                        exchangeOwner={this.props.exchangeOwner}
                     />
 
                     {
