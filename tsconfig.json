@@ -15,7 +15,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "isolatedModules": true,
     "noEmit": true,
@@ -41,6 +41,7 @@
     "build",
     "cache",
     "artifacts",
-    "subgraph"
+    "subgraph",
+    "thegraph"
   ]
 }
